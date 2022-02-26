@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+  <title>Art Game</title>
+  <script src="scripts/game.js" defer></script>
+</head>
+
+<body>
+  <div class="content">
+    <header>
+      <h1>MTG Art Game</h1>
+      <h2>Guess the card based on the artwork!</h2>
+    </header>
+    <div class="info-container">
+      <div class="card-container">
+        <img src="images/blank.png" id="card" />
+      </div>
+    </div>
+    <div class="getUserInput">
+      <label for="guessBox">What card is this?</label>
+      <input id="guessBox" type="text" required autofocus />
+      <div class="answers">
+        <div id="answerBox"></div>
+      </div>
+      <div id="scoreBox"></div>
+    </div>
+    <div class="button-container">
+      <button type="submit" name="submitButton" id="submitButton">
+        Submit
+      </button>
+      <button type="button" name="skipButton" id="skip">
+        Skip
+      </button>
+    </div>
+  </div>
+  <footer>
+    <div class="signature">
+      Made with <span id="heart">&#10084;</span> by
+      <a href="mailto:rlupchurch3@gmail.com?subject=MTG%20Art%20Game" id="nameColorChange">Rob Upchurch</a>
+      &copy; <span id="year"></span>
+    </div>
+  </footer>
+</body>
+
+</html>
