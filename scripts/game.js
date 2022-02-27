@@ -1,5 +1,16 @@
 let numberCorrect = 0;
 let numberAttempted = 0;
+let cardName = "";
+
+function init() {
+  // Submit button for user input
+  const submitButton = document.querySelector(`#submitButton`);
+  submitButton.addEventListener(`click`, cardGuess);
+
+  // Skip to the next art
+  const skipButton = document.querySelector(`#skip`);
+  skipButton.addEventListener(`click`, skip);
+}
 
 async function fetchCard() {
   // Fetch a random card
@@ -15,7 +26,7 @@ async function nextRound() {
   let card = await fetchCard();
 
   // Define the card's name
-  let cardName = card.name;
+  cardName = card.name;
   console.log(cardName);
 
   // Prevent an error if the card has more than one facee
@@ -29,55 +40,6 @@ async function nextRound() {
     imageCreate.setAttribute("src", `${cardImage}`);
   }
 
-  // Collect user input and check if correct
-  function cardGuess() {
-    let guess = document.getElementById("guessBox").value;
-    let answer = cardName;
-    document.getElementById("answerBox").style.visibility = "visible";
-    document.getElementById("scoreBox").style.visibility = "visible";
-    if (guess === answer) {
-      document.getElementById(
-        "answerBox"
-      ).innerHTML = `Correct! The card was ${answer}`;
-
-      numberCorrect++;
-    } else {
-      document.getElementById(
-        "answerBox"
-      ).innerHTML = `Sorry. The correct answer was ${answer}`;
-    }
-
-    numberAttempted++; // This doesn't work correctly
-
-    document.getElementById(
-      "scoreBox"
-    ).innerHTML = `Score: ${numberCorrect} / ${numberAttempted}`;
-  }
-
-  function skip() {
-    document.getElementById("answerBox").style.visibility = "visible";
-    document.getElementById("scoreBox").style.visibility = "visible";
-    document.getElementById(
-      "answerBox"
-    ).innerHTML = `Skipped! The correct answer was ${cardName}`;
-
-    numberAttempted++; // This doesn't work correctly
-
-    document.getElementById(
-      "scoreBox"
-    ).innerHTML = `Score: ${numberCorrect} / ${numberAttempted}`;
-  }
-
-  // Submit button for user input
-  const submitButton = document.querySelector(`#submitButton`);
-  submitButton.addEventListener(`click`, cardGuess);
-  submitButton.addEventListener(`click`, nextRound);
-
-  // Skip to the next art
-  const skipButton = document.querySelector(`#skip`);
-  skipButton.addEventListener(`click`, skip);
-  skipButton.addEventListener(`click`, nextRound);
-
   // Detect enter key for submission // This isn't working either
   //     document.querySelector('#guessBox').addEventListener('keypress', function (e) {
   //     if (e.key === 'Enter') {
@@ -86,6 +48,51 @@ async function nextRound() {
   //     }
   // });
 }
+
+// Collect user input and check if correct
+function cardGuess() {
+  let guess = document.getElementById("guessBox").value;
+  let answer = cardName;
+  document.getElementById("answerBox").style.visibility = "visible";
+  document.getElementById("scoreBox").style.visibility = "visible";
+  if (guess === answer) {
+    document.getElementById(
+      "answerBox"
+    ).innerHTML = `Correct! The card was ${answer}`;
+
+    numberCorrect++;
+  } else {
+    document.getElementById(
+      "answerBox"
+    ).innerHTML = `Sorry. The correct answer was ${answer}`;
+  }
+
+  numberAttempted++;
+
+  document.getElementById(
+    "scoreBox"
+  ).innerHTML = `Score: ${numberCorrect} / ${numberAttempted}`;
+
+  nextRound();
+}
+
+function skip() {
+  document.getElementById("answerBox").style.visibility = "visible";
+  document.getElementById("scoreBox").style.visibility = "visible";
+  document.getElementById(
+    "answerBox"
+  ).innerHTML = `Skipped! The correct answer was ${cardName}`;
+
+  numberAttempted++;
+
+  document.getElementById(
+    "scoreBox"
+  ).innerHTML = `Score: ${numberCorrect} / ${numberAttempted}`;
+
+  nextRound();
+}
+
+init();
 
 // Run the game on page load
 nextRound();
