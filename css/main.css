@@ -8,24 +8,26 @@ a:link,
 a:visited,
 a:hover,
 a:active {
+  color: #fff;
   text-decoration: none;
 }
 
 body {
   background-color: #222;
   color: #fff;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 button {
   background-color: transparent;
-  border: 1px solid #731fa1;
+  border: 1px solid #d299ff;
   border-radius: 4px;
   box-sizing: border-box;
-  color: #731fa1;
+  color: #d299ff;
   cursor: pointer;
   display: inline-block;
-  font-size: 11px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.75rem;
   font-weight: 600;
   height: 38px;
   letter-spacing: 0.1rem;
@@ -43,8 +45,7 @@ button {
 
 button:hover,
 button:focus {
-  border-color: #888;
-  color: #888;
+  border-color: #fff;
   outline: 0;
 }
 
@@ -57,13 +58,51 @@ footer {
   text-shadow: 1px 1px 1px #000;
 }
 
+h1 {
+  color: #d299ff;
+  font-size: 3rem;
+  font-weight: bolder;
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: lighter;
+  margin-bottom: 25px;
+}
+
 header {
   margin: auto;
+  padding-top: 50px;
   text-align: center;
   width: 100%;
 }
 
-.button-container {
+input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  border: 1px solid #d299ff;
+  border-radius: 4px;
+  box-shadow: none;
+  box-sizing: border-box;
+  color: #d299ff;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.25rem;
+  height: 50px;
+  margin: 15px;
+  max-width: 60%;
+  padding: 6px 10px;
+  width: 100%;
+}
+
+.answers {
+  align-items: center;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.buttonContainer {
   margin: auto;
   text-align: center;
   width: 100%;
@@ -72,6 +111,11 @@ header {
 .content {
   margin: auto;
   max-width: 960px;
+}
+
+.flavorTextContainer {
+  padding: 25px 0 10px 0;
+  text-align: center;
 }
 
 .getUserInput {
@@ -84,12 +128,7 @@ header {
   width: 100%;
 }
 
-.info {
-  display: inline;
-  text-transform: capitalize;
-}
-
-.info-container {
+.infoContainer {
   align-content: center;
   align-items: center;
   display: flex;
@@ -98,27 +137,34 @@ header {
   width: 100%;
 }
 
-.card-container {
-  margin: auto;
+#answerBox {
+  margin: 0 0 25px 0;
   text-align: center;
-  width: 100%;
 }
 
-#answerBox {
-  visibility: hidden;
+#flavorText {
+  font-size: 1rem;
+  font-style: italic;
+}
+
+#guessBoxInput {
+  margin-bottom: 25px;
 }
 
 #heart {
-  margin: 0 0.5rem 0 0.5rem;
   -webkit-text-fill-color: red;
   -webkit-text-stroke: 1px black;
 }
 
-#nameColorChange {
-  color: #fff;
-  margin: 0 0.5rem 0 0.5rem;
+#imageContainer {
+  margin-bottom: 20px;
 }
 
 #scoreBox {
+  font-size: 1.2rem;
+  left: 0;
+  margin: 10px 0 0 10px;
+  position: fixed;
+  top: 0;
   visibility: hidden;
 }
