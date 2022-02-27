@@ -11,11 +11,12 @@ async function fetchCard() {
   }
 }
 
-async function cardInfo() {
+async function nextRound() {
   let card = await fetchCard();
 
   // Define the card's name
   let cardName = card.name;
+  console.log(cardName);
 
   // Prevent an error if the card has more than one facee
   if (card.card_faces === undefined) {
@@ -30,11 +31,11 @@ async function cardInfo() {
 
   // Collect user input and check if correct
   function cardGuess() {
-    let guessBox = document.getElementById("guessBox").value;
+    let guess = document.getElementById("guessBox").value;
     let answer = cardName;
     document.getElementById("answerBox").style.visibility = "visible";
     document.getElementById("scoreBox").style.visibility = "visible";
-    if (guessBox == answer) {
+    if (guess === answer) {
       document.getElementById(
         "answerBox"
       ).innerHTML = `Correct! The card was ${answer}`;
@@ -70,12 +71,12 @@ async function cardInfo() {
   // Submit button for user input
   const submitButton = document.querySelector(`#submitButton`);
   submitButton.addEventListener(`click`, cardGuess);
-  submitButton.addEventListener(`click`, cardInfo);
+  submitButton.addEventListener(`click`, nextRound);
 
   // Skip to the next art
   const skipButton = document.querySelector(`#skip`);
   skipButton.addEventListener(`click`, skip);
-  skipButton.addEventListener(`click`, cardInfo);
+  skipButton.addEventListener(`click`, nextRound);
 
   // Detect enter key for submission // This isn't working either
   //     document.querySelector('#guessBox').addEventListener('keypress', function (e) {
@@ -87,7 +88,7 @@ async function cardInfo() {
 }
 
 // Run the game on page load
-cardInfo();
+nextRound();
 
 // Always display the current year for the copyright
 document

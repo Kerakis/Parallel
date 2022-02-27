@@ -2,26 +2,87 @@
 // let numberAttempted = 0;
 
 async function fetchCard() {
-    // Fetch a random card
-    try {
-        const response = await fetch(`https://api.scryfall.com/cards/random`);
-        return await response.json();
-    } catch (error) {
-        console.log(error);
-    }
+  // Fetch a random card
+  try {
+    let response = await fetch(`https://api.scryfall.com/cards/random`);
+    let data = await response.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-let card = await fetchCard();
+async function storeData() {
+  let cardData = await fetchCard();
+  console.log(cardData);
+  let cardName = cardData.name;
+  console.log(cardName);
 
-// async function cardInfo() {
-//   let card = await fetch(`https://api.scryfall.com/cards/random`).then(response => response.json())
-//   .then(card => {console.log(card.name);
-//   })
-//   .catch(console.error);
-//   return JSON.parse(card);
+  return cardData;
+}
+
+storeData();
+
+// async function fetchCard() {
+//   // Fetch a random card
+//   try {
+//     const response = await fetch(`https://api.scryfall.com/cards/random`);
+//     return await response.json();
+//   } catch (error) {
+//     console.log(error);
 //   }
-
+// }
 //
+// async function cardInfo() {
+//   let card = await fetchCard()
+//   console.log(card);
+//   console.log(card.name);
+//   return card;
+// }
+
+// async function currentCard() {
+//   let currentCard = await cardInfo();
+//   console.log(currentCard);
+//   let cardName = currentCard.name;
+//   console.log(cardName);
+//
+//   // Prevent an error if the card has more than one facee
+//   if (currentCard.card_faces === undefined) {
+//     let cardImage = currentCard.image_uris.art_crop;
+//     let imageCreate = document.getElementById("card");
+//     imageCreate.setAttribute("src", `${cardImage}`);
+//   } else {
+//     let cardImage = currentCard.card_faces[0].image_uris.art_crop;
+//     let imageCreate = document.getElementById("card");
+//     imageCreate.setAttribute("src", `${cardImage}`);
+//   }
+//
+//   // Collect user input and check if correct
+//           let guessBox = document.getElementById('guessBox').value;
+//           let answer = cardName;
+//           document.getElementById('answerBox').style.visibility = 'visible';
+//           document.getElementById('scoreBox').style.visibility = 'visible';
+//           if (guessBox == answer) {
+//               document.getElementById(
+//                   'answerBox'
+//               ).innerHTML = `Correct! The card was ${answer}`;
+//
+//               numberCorrect++;
+//
+//           } else {
+//               document.getElementById(
+//                   'answerBox'
+//               ).innerHTML = `Sorry. The correct answer was ${answer}`;
+//           }
+//
+//           numberAttempted++; // This doesn't work correctly
+//
+//           document.getElementById(
+//               'scoreBox'
+//           ).innerHTML = `Score: ${numberCorrect} / ${numberAttempted}`;
+// }
+
 // async function cardInfo() {
 //     let card = await fetchCard();
 //
@@ -108,10 +169,10 @@ let card = await fetchCard();
 // // // });
 // // }
 
-// Run the game on page load
-cardInfo();
+// // Run the game on page load
+// fetchCard();
 
 // Always display the current year for the copyright
 document
-    .getElementById('year')
-    .appendChild(document.createTextNode(new Date().getFullYear()));
+  .getElementById("year")
+  .appendChild(document.createTextNode(new Date().getFullYear()));
