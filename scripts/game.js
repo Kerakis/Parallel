@@ -71,14 +71,17 @@ async function nextRound() {
     cardArt = card.image_uris.art_crop;
     let imageCreate = document.getElementById("currentCardArt");
     imageCreate.setAttribute("src", `${cardArt}`);
+    imageCreate.setAttribute("max-width", `25%`);
   } else if (card.card_faces === 2) {
     cardArt = card.card_faces[0].image_uris.art_crop;
     let imageCreate = document.getElementById("currentCardArt");
     imageCreate.setAttribute("src", `${cardArt}`);
+    imageCreate.setAttribute("max-width", `25%`);
   } else {
     cardArt = card.card_faces[0].image_uris.art_crop;
     let imageCreate = document.getElementById("currentCardArt");
     imageCreate.setAttribute("src", `${cardArt}`);
+    imageCreate.setAttribute("max-width", `25%`);
   }
 
   document.getElementById("guessBox").focus();
