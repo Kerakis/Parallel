@@ -80,6 +80,8 @@ async function nextRound() {
     let imageCreate = document.getElementById("currentCardArt");
     imageCreate.setAttribute("src", `${cardArt}`);
   }
+
+  document.getElementById("guessBox").focus();
 }
 
 // Display the card image for the previous round

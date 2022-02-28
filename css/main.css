@@ -4,6 +4,10 @@
   padding: 0;
 }
 
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
 a:link,
 a:visited,
 a:hover,
@@ -26,7 +30,7 @@ button {
   color: #d299ff;
   cursor: pointer;
   display: inline-block;
-  font-family: "Montserrat", sans-serif;
+  font-family: inherit;
   font-size: 0.75rem;
   font-weight: 600;
   height: 38px;
@@ -55,7 +59,7 @@ footer {
   margin: 50px 10px 5px 0;
   position: fixed;
   right: 0;
-  text-shadow: 1px 1px 1px #000;
+  text-shadow: 1px 1px 1px #fff;
 }
 
 h1 {
@@ -71,7 +75,6 @@ h2 {
 }
 
 header {
-  margin: auto;
   padding-top: 50px;
   text-align: center;
   width: 100%;
@@ -87,7 +90,7 @@ input {
   box-shadow: none;
   box-sizing: border-box;
   color: #d299ff;
-  font-family: "Montserrat", sans-serif;
+  font-family: inherit;
   font-size: 1.25rem;
   height: 50px;
   margin: 15px;
@@ -103,12 +106,15 @@ input {
 }
 
 .buttonContainer {
-  margin: auto;
   text-align: center;
   width: 100%;
 }
 
 .content {
+  align-items: stretch;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
   margin: auto;
   max-width: 960px;
 }
@@ -167,4 +173,26 @@ input {
   position: fixed;
   top: 0;
   visibility: hidden;
+}
+
+@media screen and (max-width: 695px) {
+  footer {
+    position: relative;
+    align-self: center;
+  }
+
+  input {
+    max-width: 90%;
+  }
+
+  .content {
+    flex: auto;
+    flex-shrink: 0;
+  }
+}
+
+@media screen and (min-width: 696px) {
+  .content {
+    justify-content: space-evenly;
+  }
 }
