@@ -130,7 +130,9 @@ function cardGuess() {
     displayCard();
     keepScore();
   }
+  document.getElementById("guessBox").value = "";
 }
+
 function skip() {
   document.getElementById("scoreBox").style.visibility = "visible";
   document.getElementById(
@@ -149,6 +151,7 @@ function skip() {
 
   displayCard();
   nextRound();
+  document.getElementById("guessBox").value = "";
 }
 
 // Run the game on page load
