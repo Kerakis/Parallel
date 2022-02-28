@@ -54,28 +54,23 @@ button:focus {
 }
 
 footer {
-  bottom: 0;
-  color: #fff;
-  margin: 50px 10px 5px 0;
-  position: fixed;
-  right: 0;
-  text-shadow: 1px 1px 1px #fff;
+  align-self: center;
+  order: 6;
+  position: relative;
 }
 
 h1 {
   color: #d299ff;
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: bolder;
 }
 
 h2 {
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: lighter;
-  margin-bottom: 25px;
 }
 
 header {
-  padding-top: 50px;
   text-align: center;
   width: 100%;
 }
@@ -93,7 +88,6 @@ input {
   font-family: inherit;
   font-size: 1.25rem;
   height: 50px;
-  margin: 15px;
   max-width: 60%;
   padding: 6px 10px;
   width: 100%;
@@ -122,7 +116,8 @@ input {
 }
 
 .flavorTextContainer {
-  padding: 25px 0 10px 0;
+  margin: 1.5rem 0 0 0;
+  max-width: 90%;
   text-align: center;
 }
 
@@ -133,7 +128,6 @@ input {
   flex-flow: column nowrap;
   justify-content: center;
   order: 2;
-  padding: 20px 0 20px 0;
   width: 100%;
 }
 
@@ -143,12 +137,13 @@ input {
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
+  margin: 1rem 0 1rem 0;
   order: 1;
   width: 100%;
 }
 
 #answerBox {
-  margin: 0 0 25px 0;
+  margin: 0 0 1.5rem 0;
   text-align: center;
 }
 
@@ -167,24 +162,18 @@ input {
 }
 
 #imageContainer {
-  margin-bottom: 20px;
+  margin-bottom: 1rem;
 }
 
 #scoreBox {
   align-self: center;
-  font-size: 1.2rem;
-  margin: 0 0 15px 10px;
+  font-size: 1rem;
+  margin: 1rem 0 1rem 0;
   visibility: hidden;
   order: 3;
 }
 
 @media screen and (max-width: 695px) {
-  footer {
-    position: relative;
-    align-self: center;
-    order: 6;
-  }
-
   input {
     max-width: 90%;
   }
@@ -194,14 +183,53 @@ input {
     flex-shrink: 0;
   }
 
+  #cardArt {
+    max-width: 25vw;
+  }
+
   #currentCardArt {
     max-width: 75vw;
   }
 }
 
 @media screen and (min-width: 696px) {
+  footer {
+    bottom: 0;
+    color: #fff;
+    margin: 0 10px 5px 0;
+    position: fixed;
+    right: 0;
+  }
+
+  h1 {
+    font-size: 3rem;
+    font-weight: bolder;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: lighter;
+  }
+
+  header {
+    margin-top: 3rem;
+  }
+
+  input {
+    margin: 1rem 0 1rem 0;
+  }
+
   .content {
     justify-content: space-evenly;
+  }
+
+  .flavorTextContainer {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .getUserInput {
+    margin: 1rem 0 1rem 0;
   }
 
   #scoreBox {
