@@ -135,6 +135,10 @@ input {
   width: 100%;
 }
 
+.guessButtons {
+  width: 350px;
+}
+
 .infoContainer {
   align-content: center;
   align-items: center;
@@ -180,6 +184,8 @@ input {
 
 #guessBoxInput {
   margin-bottom: 10px;
+  order: 2;
+  text-align: center;
 }
 
 #heart {

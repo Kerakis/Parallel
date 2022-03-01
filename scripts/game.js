@@ -3,6 +3,7 @@ let numberAttempted = 0;
 let cardName = "";
 let cardArt = "";
 let format = "";
+let guess ="";
 
 function init() {
   // Difficulty buttons
@@ -23,10 +24,6 @@ function init() {
     setFormat(`commander`);
   });
 
-  // Submit button for user input
-  const submitButton = document.querySelector(`#submitButton`);
-  submitButton.addEventListener(`click`, cardGuess);
-
   // Skip to the next art
   const skipButton = document.querySelector(`#skip`);
   skipButton.addEventListener(`click`, skip);
@@ -34,16 +31,6 @@ function init() {
   // Change format
   const formatButton = document.querySelector(`#format`);
   formatButton.addEventListener(`click`, changeFormat);
-
-  // Detect enter key for submission
-  document
-    .querySelector("#guessBox")
-    .addEventListener("keypress", function (e) {
-      if (e.key === "Enter") {
-        cardGuess();
-        document.getElementById("guessBox").value = "";
-      }
-    });
 }
 
 // Select format, hide modal, and display game
@@ -58,7 +45,6 @@ function setFormat(choice) {
 
 // Fetch a random card
 async function fetchCard() {
-  // Fetch a random card
   try {
     const response = await fetch(
       `https://api.scryfall.com/cards/random?q=f%3A${format}`
@@ -69,13 +55,65 @@ async function fetchCard() {
   }
 }
 
+// Fetch a list of all card names
+async function fetchCardNames() {
+  try {
+    const response = await fetch(`./assets/card-names.json`);
+    return await response.json();
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function answerSelection(choice) {
+  guess = choice;
+}
+
 // Pull the needed card information for the current round
 async function nextRound() {
   let card = await fetchCard();
+  let options = await fetchCardNames();
+
+  // Pull 3 random card names
+  let randomCardArray = Array.from({ length: 3 }, () =>
+    Math.floor(Math.random() * options.data.length)
+  );
+  console.log(randomCardArray);
+
+  let randomCardName1 = options.data[randomCardArray[0]];
+  let randomCardName2 = options.data[randomCardArray[1]];
+  let randomCardName3 = options.data[randomCardArray[2]];
+
+  guessButton1 = document.createElement("button");
+  guessButton1.setAttribute("class", `guessButtons`);
+  guessButton1.innerHTML = `${randomCardName1}`;
+  guessButton1.addEventListener(`click`, answerSelection(`${randomCardName1}`));
+  document.getElementById("getUserInput").appendChild(guessButton1);
+  guessButton2 = document.createElement("button");
+  guessButton2.setAttribute("class", `guessButtons`);
+  guessButton2.innerHTML = `${randomCardName2}`;
+  guessButton2.addEventListener(`click`, answerSelection(`${randomCardName2}`));
+  document.getElementById("getUserInput").appendChild(guessButton2);
+  guessButton3 = document.createElement("button");
+  guessButton3.setAttribute("class", `guessButtons`);
+  guessButton3.innerHTML = `${randomCardName3}`;
+  guessButton3.addEventListener(`click`, answerSelection(`${randomCardName3}`));
+  document.getElementById("getUserInput").appendChild(guessButton3);
 
   // Define the card's name
-  cardName = card.name;
+  cardName = "travis"; // card.name;
   console.log(`The card is ${cardName}, you filthy cheater!`);
+  guessButton4 = document.createElement("button");
+  guessButton4.setAttribute("class", `guessButtons`);
+  guessButton4.innerHTML = `${cardName}`;
+  guessButton4.addEventListener(`click`, cardGuess);
+  document.getElementById("getUserInput").appendChild(guessButton4);
+
+  // Randomize the order of the answer buttons
+  var cardButtons = document.querySelector(".getUserInput");
+  for (var i = cardButtons.children.length; i >= 0; i--) {
+    cardButtons.appendChild(cardButtons.children[(Math.random() * i) | 0]);
+  }
 
   // Define the card's flavor text and display it. This should prevent errors for certain multi-face cards.
   if (card.card_faces === undefined) {
@@ -122,6 +160,13 @@ async function nextRound() {
   document.getElementById("guessBox").focus();
 }
 
+function removeButtons() {
+  document.getElementById("getUserInput").removeChild(guessButton1);
+  document.getElementById("getUserInput").removeChild(guessButton2);
+  document.getElementById("getUserInput").removeChild(guessButton3);
+  document.getElementById("getUserInput").removeChild(guessButton4);
+}
+
 // Display the card image for the previous round
 function displayCard() {
   let imageCreate = document.getElementById("cardArt");
@@ -157,6 +202,7 @@ function cardGuess() {
     numberCorrect++;
     displayCard();
     keepScore();
+    removeButtons();
   } else {
     document.getElementById(
       "answerBox"
@@ -164,6 +210,7 @@ function cardGuess() {
 
     displayCard();
     keepScore();
+    removeButtons();
   }
   document.getElementById("guessBox").value = "";
 }
@@ -186,6 +233,7 @@ function skip() {
 
   displayCard();
   nextRound();
+  removeButtons();
   document.getElementById("guessBox").value = "";
 }
 

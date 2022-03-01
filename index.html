@@ -31,20 +31,19 @@
           <span id="flavorText"></span>
         </div>
       </div>
-      <div class="getUserInput">
-        <label for="guessBox" id="guessBoxInput">What card has this art?</label>
-        <input id="guessBox" type="text" />
+      <div id="guessBoxInput">
+        <p>What card has this art?</p>
       </div>
+      <div class="getUserInput" id="getUserInput"></div>
       <div class="answers">
         <div id="answerBox"></div>
         <div id="imageContainer"><img id="cardArt" /></div>
       </div>
       <div class="buttonContainer">
-        <button type="submit" name="submitButton" id="submitButton">
-          Submit
-        </button>
         <button type="button" name="skipButton" id="skip">Skip</button>
-        <button type="button" name="formatButton" id="format">Change Format</button>
+        <button type="button" name="formatButton" id="format">
+          Change Format
+        </button>
       </div>
       <footer>
         <div class="signature">
@@ -62,10 +61,14 @@
     <div id="diffModal">
       <div id="modalContent">
         <p id="diffQuestion">What format would you like cards from?</p>
-        <button type="button" id="standard" class="diffButtons">Standard</button>
+        <button type="button" id="standard" class="diffButtons">
+          Standard
+        </button>
         <button type="button" id="pioneer" class="diffButtons">Pioneer</button>
         <button type="button" id="modern" class="diffButtons">Modern</button>
-        <button type="button" id="commander" class="diffButtons">Commander</button>
+        <button type="button" id="commander" class="diffButtons">
+          Commander
+        </button>
       </div>
     </div>
   </body>
