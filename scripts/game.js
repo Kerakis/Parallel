@@ -2,30 +2,27 @@ let numberCorrect = 0;
 let numberAttempted = 0;
 let cardName = "";
 let cardArt = "";
-
-function modal() {
-  // Get the modal
-var modal = document.getElementById("diffModal");
-
-// When the user clicks on the button, open the modal
-btn.onclick = function() {
-  modal.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
-}
+let format = "";
 
 function init() {
+  // Difficulty buttons
+  const standard = document.querySelector(`#standard`);
+  standard.addEventListener(`click`, () => {
+    setFormat(`standard`);
+  });
+  const pioneer = document.querySelector(`#pioneer`);
+  pioneer.addEventListener(`click`, () => {
+    setFormat(`pioneer`);
+  });
+  const modern = document.querySelector(`#modern`);
+  modern.addEventListener(`click`, () => {
+    setFormat(`modern`);
+  });
+  const commander = document.querySelector(`#commander`);
+  commander.addEventListener(`click`, () => {
+    setFormat(`commander`);
+  });
+
   // Submit button for user input
   const submitButton = document.querySelector(`#submitButton`);
   submitButton.addEventListener(`click`, cardGuess);
@@ -33,6 +30,10 @@ function init() {
   // Skip to the next art
   const skipButton = document.querySelector(`#skip`);
   skipButton.addEventListener(`click`, skip);
+
+  // Change format
+  const formatButton = document.querySelector(`#format`);
+  formatButton.addEventListener(`click`, changeFormat);
 
   // Detect enter key for submission
   document
@@ -45,11 +46,23 @@ function init() {
     });
 }
 
+// Select format, hide modal, and display game
+function setFormat(choice) {
+  format = choice;
+  nextRound();
+  let modal = document.getElementById("diffModal");
+  modal.style.display = "none";
+  let content = document.getElementById("content");
+  content.style.display = "flex";
+}
+
 // Fetch a random card
 async function fetchCard() {
   // Fetch a random card
   try {
-    const response = await fetch(`https://api.scryfall.com/cards/random`);
+    const response = await fetch(
+      `https://api.scryfall.com/cards/random?q=f%3A${format}`
+    );
     return await response.json();
   } catch (error) {
     console.log(error);
@@ -176,9 +189,15 @@ function skip() {
   document.getElementById("guessBox").value = "";
 }
 
+function changeFormat() {
+  let modal = document.getElementById("diffModal");
+  modal.style.display = "inline";
+  let content = document.getElementById("content");
+  content.style.display = "none";
+}
+
 // Run the game on page load
 init();
-nextRound();
 
 // Always display the current year for the copyright
 document
