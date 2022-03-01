@@ -33,14 +33,11 @@ button {
   font-family: inherit;
   font-size: 0.75rem;
   font-weight: 600;
-  height: 38px;
+  height: 30px;
   letter-spacing: 0.1rem;
-  line-height: 38px;
-  margin-bottom: 0.5rem;
-  margin-left: 15px;
-  margin-right: 15px;
-  margin-top: 0.5rem;
-  padding: 0 30px;
+  line-height: 30px;
+  margin: 0.5rem;
+  padding: 0 20px;
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
@@ -101,22 +98,29 @@ input {
 }
 
 .buttonContainer {
+  align-items: center;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
   order: 5;
-  text-align: center;
   width: 100%;
 }
 
 .content {
   align-items: stretch;
-  display: flex;
+  display: none;
   flex-flow: column nowrap;
   justify-content: flex-start;
   margin: auto;
   max-width: 960px;
 }
 
+.diffButtons {
+  width: 15rem;
+}
+
 .flavorTextContainer {
-  margin: 1.5rem 0 0 0;
+  margin: 0.25rem 0 0 0;
   max-width: 90%;
   text-align: center;
 }
@@ -142,18 +146,40 @@ input {
   width: 100%;
 }
 
+.signature {
+  font-size: 0.75rem;
+  margin: 0.25rem 0 0 0;
+}
+
 #answerBox {
   margin: 0 0 1.5rem 0;
   text-align: center;
 }
 
+#diffModal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+#diffQuestion {
+  color: #d299ff;
+  margin: 0 0 1rem 0;
+}
+
 #flavorText {
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-style: italic;
 }
 
 #guessBoxInput {
-  margin-bottom: 25px;
+  margin-bottom: 10px;
 }
 
 #heart {
@@ -165,12 +191,45 @@ input {
   margin-bottom: 1rem;
 }
 
+#modalContent {
+  align-items: center;
+  align-content: center;
+  justify-content: space-around;
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 15% auto;
+  padding: 20px;
+  width: 80%;
+}
+
 #scoreBox {
   align-self: center;
-  font-size: 1rem;
-  margin: 1rem 0 1rem 0;
   visibility: hidden;
   order: 3;
+  background-color: transparent;
+  border: 1px solid #d299ff;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: #d299ff;
+  display: inline-block;
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  height: 30px;
+  letter-spacing: 0.1rem;
+  line-height: 30px;
+  margin: 0.5rem;
+  padding: 0 20px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+#scoreBox:hover,
+#scoreBox:focus {
+  border-color: #fff;
+  outline: 0;
 }
 
 @media screen and (max-width: 695px) {
@@ -188,6 +247,7 @@ input {
   }
 
   #currentCardArt {
+    max-height: 50vw;
     max-width: 75vw;
   }
 }
@@ -232,8 +292,24 @@ input {
     margin: 1rem 0 1rem 0;
   }
 
+  .signature {
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  #format {
+    right: 0;
+    margin: 10px 10px 0 0;
+    position: fixed;
+    top: 0;
+  }
+
+  #flavorText {
+    font-size: 1rem;
+    font-style: italic;
+  }
+
   #scoreBox {
-    font-size: 1.2rem;
     left: 0;
     margin: 10px 0 0 10px;
     position: fixed;
