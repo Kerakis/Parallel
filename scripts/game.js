@@ -4,6 +4,10 @@ let cardName = "";
 let cardArt = "";
 let format = "";
 let guess ="";
+let guessButton1 = "";
+let guessButton2 = "";
+let guessButton3 = "";
+let guessButton4 = "";
 
 function init() {
   // Difficulty buttons
@@ -65,8 +69,9 @@ async function fetchCardNames() {
   }
 }
 
-function answerSelection(choice) {
-  guess = choice;
+function answerSelection(select) {
+  guess = select;
+  cardGuess();
 }
 
 // Pull the needed card information for the current round
@@ -74,39 +79,38 @@ async function nextRound() {
   let card = await fetchCard();
   let options = await fetchCardNames();
 
-  // Pull 3 random card names
+  // Pull 3 random card names as wrong answers
   let randomCardArray = Array.from({ length: 3 }, () =>
     Math.floor(Math.random() * options.data.length)
   );
-  console.log(randomCardArray);
 
   let randomCardName1 = options.data[randomCardArray[0]];
   let randomCardName2 = options.data[randomCardArray[1]];
   let randomCardName3 = options.data[randomCardArray[2]];
 
+  // Show the random options as buttons
   guessButton1 = document.createElement("button");
   guessButton1.setAttribute("class", `guessButtons`);
   guessButton1.innerHTML = `${randomCardName1}`;
-  guessButton1.addEventListener(`click`, answerSelection(`${randomCardName1}`));
+  guessButton1.addEventListener(`click`, function(){ answerSelection(randomCardName1); });
   document.getElementById("getUserInput").appendChild(guessButton1);
   guessButton2 = document.createElement("button");
   guessButton2.setAttribute("class", `guessButtons`);
   guessButton2.innerHTML = `${randomCardName2}`;
-  guessButton2.addEventListener(`click`, answerSelection(`${randomCardName2}`));
+  guessButton2.addEventListener(`click`, function(){ answerSelection(randomCardName2); });
   document.getElementById("getUserInput").appendChild(guessButton2);
   guessButton3 = document.createElement("button");
   guessButton3.setAttribute("class", `guessButtons`);
   guessButton3.innerHTML = `${randomCardName3}`;
-  guessButton3.addEventListener(`click`, answerSelection(`${randomCardName3}`));
+  guessButton3.addEventListener(`click`, function(){ answerSelection(randomCardName3); });
   document.getElementById("getUserInput").appendChild(guessButton3);
 
   // Define the card's name
-  cardName = "travis"; // card.name;
-  console.log(`The card is ${cardName}, you filthy cheater!`);
+  cardName = card.name;
   guessButton4 = document.createElement("button");
   guessButton4.setAttribute("class", `guessButtons`);
   guessButton4.innerHTML = `${cardName}`;
-  guessButton4.addEventListener(`click`, cardGuess);
+  guessButton4.addEventListener(`click`, function(){ answerSelection(cardName); });
   document.getElementById("getUserInput").appendChild(guessButton4);
 
   // Randomize the order of the answer buttons
@@ -156,10 +160,9 @@ async function nextRound() {
     imageCreate.setAttribute("src", `${cardArt}`);
     imageCreate.setAttribute("max-width", `25%`);
   }
-
-  document.getElementById("guessBox").focus();
 }
 
+// Remove the buttons for the next round
 function removeButtons() {
   document.getElementById("getUserInput").removeChild(guessButton1);
   document.getElementById("getUserInput").removeChild(guessButton2);
@@ -188,14 +191,8 @@ function keepScore() {
 
 // Collect user input and check if correct
 function cardGuess() {
-  let guess = document.getElementById("guessBox").value;
   let answer = cardName;
-  let compareAnswer = guess.localeCompare(answer, undefined, {
-    sensitivity: "accent",
-  });
-  if (guess === "") {
-    document.getElementById("answerBox").innerHTML = `Please enter an answer.`;
-  } else if (compareAnswer === 0) {
+  if (guess === answer) {
     document.getElementById(
       "answerBox"
     ).innerHTML = `Correct! The card was ${answer}.`;
@@ -206,13 +203,12 @@ function cardGuess() {
   } else {
     document.getElementById(
       "answerBox"
-    ).innerHTML = `Sorry. The correct answer was ${answer}. <br> You answered "${guess}".`;
+    ).innerHTML = `Sorry. The correct answer was ${answer}.<br>You answered "${guess}".`;
 
     displayCard();
     keepScore();
     removeButtons();
   }
-  document.getElementById("guessBox").value = "";
 }
 
 function skip() {
@@ -234,7 +230,6 @@ function skip() {
   displayCard();
   nextRound();
   removeButtons();
-  document.getElementById("guessBox").value = "";
 }
 
 function changeFormat() {
@@ -242,6 +237,7 @@ function changeFormat() {
   modal.style.display = "inline";
   let content = document.getElementById("content");
   content.style.display = "none";
+  removeButtons();
 }
 
 // Run the game on page load
