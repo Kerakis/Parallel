@@ -24,7 +24,7 @@ body {
 
 button {
   background-color: transparent;
-  border: 1px solid #d299ff;
+  border: 1px solid #fff;
   border-radius: 4px;
   box-sizing: border-box;
   color: #d299ff;
@@ -184,6 +184,10 @@ header {
   margin: 15% auto;
   padding: 20px;
   width: 80%;
+}
+
+#restart {
+  display: none;
 }
 
 #scoreBox {
