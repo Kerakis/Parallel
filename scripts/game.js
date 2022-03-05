@@ -11,7 +11,6 @@ let correctGuessButton = document.createElement("button");
 let seconds = "";
 let timer = "";
 let displayTimer = document.getElementById("timerBox");
-const skipButton = document.querySelector(`#skip`);
 const formatButton = document.querySelector(`#format`);
 
 function init() {
@@ -32,9 +31,6 @@ function init() {
   commander.addEventListener(`click`, () => {
     setFormat(`commander`);
   });
-
-  // Skip to the next art
-  skipButton.addEventListener(`click`, skip);
 
   // Change format
   formatButton.addEventListener(`click`, changeFormat);
@@ -74,12 +70,20 @@ async function fetchCardNames() {
   }
 }
 
+// Hide the restart button on game restart
+function hideRestartButton() {
+  let restartButton = document.getElementById("restart");
+  restartButton.style.display = "none";
+}
+
 // Restart the Game
 function restartGame() {
-  correctGuessButton.style.borderColor = "#d299ff";
+  correctGuessButton.style.borderColor = "";
   nextRound();
   seconds = 10;
   timerStart();
+  enableButtons();
+  hideRestartButton();
 }
 
 // Show the restart button at game end
@@ -95,14 +99,26 @@ function disableButtons() {
   guessButton2.disabled = true;
   guessButton3.disabled = true;
   correctGuessButton.disabled = true;
-  skipButton.disabled = true;
+}
+
+// Enable the guess buttons
+function enableButtons() {
+  guessButton1.disabled = false;
+  guessButton2.disabled = false;
+  guessButton3.disabled = false;
+  correctGuessButton.disabled = false;
+}
+
+// Stop the timer
+function stopTimer(timer) {
+  clearInterval(timer);
 }
 
 // Game over if the user doesn't choose the correct answer in the allotted time
 function timerStart() {
   let timer = setInterval(function () {
     if (seconds < 0) {
-      clearInterval(timer);
+      stopTimer(timer);
 
       // Highlight the correct answer
       correctGuessButton.style.borderColor = "red";
@@ -255,36 +271,11 @@ function cardGuess() {
     keepScore();
     removeButtons();
   } else {
-    document.getElementById(
-      "answerBox"
-    ).innerHTML = `Sorry. The correct answer was ${answer}.<br>You answered "${guess}".`;
-
-    displayCard();
-    keepScore();
-    removeButtons();
+    // Highlight the correct answer
+    correctGuessButton.style.borderColor = "red";
     clearInterval(timer);
+    showRestartButton();
   }
-}
-
-function skip() {
-  document.getElementById("scoreBox").style.visibility = "visible";
-  document.getElementById(
-    "answerBox"
-  ).innerHTML = `Skipped! The correct answer was ${cardName}.`;
-
-  // This requires a 1 second delay between skipping to avoid abuse
-  document.getElementById("skip").disabled = true;
-  setTimeout('document.getElementById("skip").disabled=false;', 1000);
-
-  numberAttempted++;
-
-  document.getElementById(
-    "scoreBox"
-  ).innerHTML = `Score: ${numberCorrect} / ${numberAttempted}`;
-
-  displayCard();
-  nextRound();
-  removeButtons();
 }
 
 function changeFormat() {
