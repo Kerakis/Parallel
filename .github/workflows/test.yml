@@ -12,4 +12,4 @@ jobs:
       uses: gautemo/fetch-api-data-action@1.1.0
       with:
          url: 'https://api.scryfall.com/catalog/card-names'
-         file: 'data.json'
+         file: 'assets/data.json'
