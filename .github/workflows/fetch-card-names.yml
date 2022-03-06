@@ -17,7 +17,7 @@ jobs:
       uses: gautemo/fetch-api-data-action@1.1.0
       with:
         url: 'https://api.scryfall.com/catalog/card-names'
-        file: 'assets/data.json'
+        file: 'assets/card-names.json'
         
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@v4.2.5
