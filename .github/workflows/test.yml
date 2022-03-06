@@ -12,10 +12,4 @@ jobs:
       uses: gautemo/fetch-api-data-action@1.1.0
       with:
          url: 'https://api.scryfall.com/catalog/card-names'
-         file: 'assets/data.json'
-    - name: Deploy to GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@v4.2.5
-      with:
-         branch: main # Pushes the updates to the main branch.
-         folder: assets # The location of the data.json file saved by the Fetch API Data action.
-         target-folder: assets # Saves the data into the 'data' directory on the main branch.
+         file: 'data.json'
