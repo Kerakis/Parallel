@@ -251,11 +251,10 @@ header {
 
 #restart,
 #format {
-  width: 170px;
+  width: 180px;
 }
 
-#scoreBox,
-#timerBox {
+#scoreBox {
   align-self: center;
   background-color: transparent;
   border: 1px solid #d299ff;
@@ -269,7 +268,29 @@ header {
   letter-spacing: 0.1rem;
   line-height: 30px;
   margin: 0.5rem;
-  width: 170px;
+  width: 180px;
+  padding: 0 20px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+#timerBox {
+  align-self: center;
+  background-color: transparent;
+  border: 1px solid #d299ff;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: #d299ff;
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  height: 30px;
+  letter-spacing: 0.3rem;
+  line-height: 30px;
+  margin: 0.5rem;
+  width: 180px;
   padding: 0 20px;
   text-align: center;
   text-decoration: none;
