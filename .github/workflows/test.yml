@@ -1,4 +1,4 @@
-name: Update Card Names Catalog
+name: Update Card Names Catalog V2
 on:
   schedule:
     - cron: 0 0 * * SUN
