@@ -20,3 +20,10 @@ jobs:
           configuration: '{ "method": "GET" }'
           save-location: assets
           save-name: test
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4.2.5
+        with:
+          branch: main # Pushes the updates to the main branch.
+          folder: assets # The location of the data.json file saved by the Fetch API Data action.
+          target-folder: assets # Saves the data into the 'data' directory on the main branch.
