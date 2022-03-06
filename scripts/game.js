@@ -1,13 +1,13 @@
 let level = 0;
-let cardName = "";
-let cardArt = "";
-let cardImage = "";
-let format = "";
-let guess = "";
-let seconds = "";
-let timer = "";
-let displayTimer = document.getElementById("timerBox");
-let historyModal = document.getElementById("historyModalContent");
+let cardName = '';
+let cardArt = '';
+let cardImage = '';
+let format = '';
+let guess = '';
+let seconds = '';
+let timer = '';
+let displayTimer = document.getElementById('timerBox');
+let historyModal = document.getElementById('historyModalContent');
 
 function init() {
   // Difficulty buttons
@@ -34,10 +34,10 @@ function init() {
 // Select format, hide modal, and display game
 function setFormat(choice) {
   format = choice;
-  let modal = document.getElementById("diffModal");
-  modal.style.display = "none";
-  let content = document.getElementById("content");
-  content.style.display = "flex";
+  let modal = document.getElementById('diffModal');
+  modal.style.display = 'none';
+  let content = document.getElementById('content');
+  content.style.display = 'flex';
   restartGame();
 }
 
@@ -75,44 +75,45 @@ function restartGame() {
   hideFormatButton();
   historyModal.replaceChildren();
   disableHistoryButton();
+  document.getElementById('timerBox').style.borderColor = '';
 }
 
 // Disable history during gameplay
 function disableHistoryButton() {
-  let historyButton = document.getElementById("scoreBox");
-  historyButton.setAttribute("data-bs-toggle", "");
+  let historyButton = document.getElementById('scoreBox');
+  historyButton.setAttribute('data-bs-toggle', '');
 }
 
 // Disable history during gameplay
 function enableHistoryButton() {
-  let historyButton = document.getElementById("scoreBox");
-  historyButton.setAttribute("data-bs-toggle", "modal");
+  let historyButton = document.getElementById('scoreBox');
+  historyButton.setAttribute('data-bs-toggle', 'modal');
 }
 
 // Show the restart button
 function showRestartButton() {
-  let restartButton = document.getElementById("restart");
+  let restartButton = document.getElementById('restart');
   restartButton.addEventListener(`click`, restartGame);
-  restartButton.style.display = "inline";
+  restartButton.style.display = 'inline';
 }
 
 // Hide the restart button
 function hideRestartButton() {
-  let restartButton = document.getElementById("restart");
-  restartButton.style.display = "none";
+  let restartButton = document.getElementById('restart');
+  restartButton.style.display = 'none';
 }
 
 // Show the change format button
 function showFormatButton() {
-  let formatButton = document.getElementById("format");
+  let formatButton = document.getElementById('format');
   formatButton.addEventListener(`click`, changeFormat);
-  formatButton.style.display = "inline";
+  formatButton.style.display = 'inline';
 }
 
 // Hide the change format button
 function hideFormatButton() {
-  let formatButton = document.getElementById("format");
-  formatButton.style.display = "none";
+  let formatButton = document.getElementById('format');
+  formatButton.style.display = 'none';
 }
 
 // Stop the timer
@@ -127,31 +128,31 @@ function timerStart() {
       stopTimer(timer);
 
       // Highlight the correct answer
-      document.getElementById("correctGuessButton").style.borderColor = "red";
+      document.getElementById('correctGuessButton').style.borderColor = 'red';
 
-      // Change the instructional text to display the lose condition
-      document.getElementById("answerBox").innerHTML = "Time is up! Game over!";
+      // Highlight the timer box
+      document.getElementById('timerBox').style.borderColor = 'red';
 
       showRestartButton();
       showFormatButton();
 
       // Prevent button clicking after loss
-      document.getElementById("guessButton1").disabled = true;
-      document.getElementById("guessButton2").disabled = true;
-      document.getElementById("guessButton3").disabled = true;
-      document.getElementById("correctGuessButton").disabled = true;
+      document.getElementById('guessButton1').disabled = true;
+      document.getElementById('guessButton2').disabled = true;
+      document.getElementById('guessButton3').disabled = true;
+      document.getElementById('correctGuessButton').disabled = true;
 
       enableHistoryButton();
 
       historyModal.removeChild(historyModal.firstChild);
     } else {
-      displayTimer.innerHTML = "00:" + seconds.toString().padStart(2, "0");
+      displayTimer.innerHTML = '00:' + seconds.toString().padStart(2, '0');
       seconds--;
     }
     if (seconds < 4) {
-      displayTimer.style.color = "red";
+      displayTimer.style.color = 'red';
     } else {
-      displayTimer.style.color = "#d299ff";
+      displayTimer.style.color = '#d299ff';
     }
   }, 1000);
 }
@@ -175,93 +176,105 @@ async function nextRound() {
   let randomCardName2 = options.data[randomCardArray[1]];
   let randomCardName3 = options.data[randomCardArray[2]];
 
-  let guessButton1 = document.createElement("button");
-  let guessButton2 = document.createElement("button");
-  let guessButton3 = document.createElement("button");
-  let correctGuessButton = document.createElement("button");
+  let guessButton1 = document.createElement('button');
+  let guessButton2 = document.createElement('button');
+  let guessButton3 = document.createElement('button');
+  let correctGuessButton = document.createElement('button');
 
   // Show the random options as buttons
-  guessButton1.setAttribute("class", `guessButtons`);
-  guessButton1.setAttribute("id", `guessButton1`);
+  guessButton1.setAttribute('class', `guessButtons`);
+  guessButton1.setAttribute('id', `guessButton1`);
   guessButton1.innerHTML = `${randomCardName1}`;
   guessButton1.addEventListener(`click`, function () {
     answerSelection(randomCardName1);
   });
-  document.getElementById("getUserInput").appendChild(guessButton1);
-  guessButton2.setAttribute("class", `guessButtons`);
-  guessButton2.setAttribute("id", `guessButton2`);
+  guessButton1.addEventListener('click', () => {
+    guessButton1.style.borderColor = '#fff';
+  });
+  document.getElementById('getUserInput').appendChild(guessButton1);
+  guessButton2.setAttribute('class', `guessButtons`);
+  guessButton2.setAttribute('id', `guessButton2`);
   guessButton2.innerHTML = `${randomCardName2}`;
   guessButton2.addEventListener(`click`, function () {
     answerSelection(randomCardName2);
   });
-  document.getElementById("getUserInput").appendChild(guessButton2);
-  guessButton3.setAttribute("class", `guessButtons`);
-  guessButton3.setAttribute("id", `guessButton3`);
+  guessButton2.addEventListener('click', () => {
+    guessButton2.style.borderColor = '#fff';
+  });
+  document.getElementById('getUserInput').appendChild(guessButton2);
+  guessButton3.setAttribute('class', `guessButtons`);
+  guessButton3.setAttribute('id', `guessButton3`);
   guessButton3.innerHTML = `${randomCardName3}`;
   guessButton3.addEventListener(`click`, function () {
     answerSelection(randomCardName3);
   });
-  document.getElementById("getUserInput").appendChild(guessButton3);
+  guessButton3.addEventListener('click', () => {
+    guessButton3.style.borderColor = '#fff';
+  });
+  document.getElementById('getUserInput').appendChild(guessButton3);
 
   // Define the card's name
   cardName = card.name;
-  correctGuessButton.setAttribute("class", `guessButtons`);
-  correctGuessButton.setAttribute("id", `correctGuessButton`);
+  correctGuessButton.setAttribute('class', `guessButtons`);
+  correctGuessButton.setAttribute('id', `correctGuessButton`);
   correctGuessButton.innerHTML = `${cardName}`;
   correctGuessButton.addEventListener(`click`, function () {
     answerSelection(cardName);
   });
-  document.getElementById("getUserInput").appendChild(correctGuessButton);
+  correctGuessButton.addEventListener('click', () => {
+    correctGuessButton.style.borderColor = '#fff';
+  });
+  document.getElementById('getUserInput').appendChild(correctGuessButton);
 
   // Randomize the order of the answer buttons
-  var cardButtons = document.querySelector(".getUserInput");
+  var cardButtons = document.querySelector('.getUserInput');
   for (var i = cardButtons.children.length; i >= 0; i--) {
     cardButtons.appendChild(cardButtons.children[(Math.random() * i) | 0]);
   }
 
   // Make the button text smaller for long card names like MDFC
   if (randomCardName1.length >= 50 && randomCardName1.length <= 55) {
-    document.getElementById("guessButton1").style.fontSize = "0.55rem";
+    document.getElementById('guessButton1').style.fontSize = '0.55rem';
   } else if (randomCardName1.length > 50) {
-    document.getElementById("guessButton1").style.fontSize = "0.5rem";
+    document.getElementById('guessButton1').style.fontSize = '0.5rem';
   }
   if (randomCardName2.length >= 50 && randomCardName2.length <= 55) {
-    document.getElementById("guessButton2").style.fontSize = "0.55rem";
+    document.getElementById('guessButton2').style.fontSize = '0.55rem';
   } else if (randomCardName2.length > 50) {
-    document.getElementById("guessButton2").style.fontSize = "0.5rem";
+    document.getElementById('guessButton2').style.fontSize = '0.5rem';
   }
   if (randomCardName3.length >= 50 && randomCardName3.length <= 55) {
-    document.getElementById("guessButton3").style.fontSize = "0.55rem";
+    document.getElementById('guessButton3').style.fontSize = '0.55rem';
   } else if (randomCardName3.length > 50) {
-    document.getElementById("guessButton3").style.fontSize = "0.5rem";
+    document.getElementById('guessButton3').style.fontSize = '0.5rem';
   }
   if (cardName.length >= 50 && cardName.length <= 55) {
-    document.getElementById("correctGuessButton").style.fontSize = "0.55rem";
+    document.getElementById('correctGuessButton').style.fontSize = '0.55rem';
   } else if (cardName.length > 50) {
-    document.getElementById("correctGuessButton").style.fontSize = "0.5rem";
+    document.getElementById('correctGuessButton').style.fontSize = '0.5rem';
   }
 
   // Define the card's flavor text and display it. This should prevent errors for certain multi-face cards.
   if (card.card_faces === undefined) {
     let cardFlavor = card.flavor_text;
     if (cardFlavor !== undefined) {
-      document.getElementById("flavorText").innerHTML = `'${cardFlavor}'`;
+      document.getElementById('flavorText').innerHTML = `'${cardFlavor}'`;
     } else {
-      document.getElementById("flavorText").innerHTML = ``;
+      document.getElementById('flavorText').innerHTML = ``;
     }
   } else if (card.card_faces === 2) {
     let cardFlavor = card.flavor_text;
     if (cardFlavor !== undefined) {
-      document.getElementById("flavorText").innerHTML = `'${cardFlavor}'`;
+      document.getElementById('flavorText').innerHTML = `'${cardFlavor}'`;
     } else {
-      document.getElementById("flavorText").innerHTML = ``;
+      document.getElementById('flavorText').innerHTML = ``;
     }
   } else {
     let cardFlavor = card.card_faces[1].flavor_text;
     if (cardFlavor !== undefined) {
-      document.getElementById("flavorText").innerHTML = `'${cardFlavor}'`;
+      document.getElementById('flavorText').innerHTML = `'${cardFlavor}'`;
     } else {
-      document.getElementById("flavorText").innerHTML = ``;
+      document.getElementById('flavorText').innerHTML = ``;
     }
   }
 
@@ -269,115 +282,77 @@ async function nextRound() {
   if (card.card_faces === undefined) {
     cardArt = card.image_uris.art_crop;
     cardImage = card.image_uris.border_crop;
-    let imageCreate = document.getElementById("currentCardArt");
-    imageCreate.setAttribute("src", `${cardArt}`);
-    imageCreate.setAttribute("max-width", `25%`);
+    let imageCreate = document.getElementById('currentCardArt');
+    imageCreate.setAttribute('src', `${cardArt}`);
+    imageCreate.setAttribute('max-width', `25%`);
   } else if (card.image_uris === undefined) {
     cardArt = card.card_faces[0].image_uris.art_crop;
     cardImage = card.card_faces[0].image_uris.border_crop;
-    let imageCreate = document.getElementById("currentCardArt");
-    imageCreate.setAttribute("src", `${cardArt}`);
-    imageCreate.setAttribute("max-width", `25%`);
+    let imageCreate = document.getElementById('currentCardArt');
+    imageCreate.setAttribute('src', `${cardArt}`);
+    imageCreate.setAttribute('max-width', `25%`);
   } else {
     cardArt = card.image_uris.art_crop;
     cardImage = card.image_uris.border_crop;
-    let imageCreate = document.getElementById("currentCardArt");
-    imageCreate.setAttribute("src", `${cardArt}`);
-    imageCreate.setAttribute("max-width", `25%`);
+    let imageCreate = document.getElementById('currentCardArt');
+    imageCreate.setAttribute('src', `${cardArt}`);
+    imageCreate.setAttribute('max-width', `25%`);
   }
 
   // Append card into history modal
-  let cardLink = document.createElement("a");
-  cardLink.setAttribute("href", `https://scryfall.com/cards/${card.id}`);
-  cardLink.setAttribute("target", "_blank");
-  cardLink.setAttribute("rel", "noreferrer");
+  let cardLink = document.createElement('a');
+  cardLink.setAttribute('href', `https://scryfall.com/cards/${card.id}`);
+  cardLink.setAttribute('target', '_blank');
+  cardLink.setAttribute('rel', 'noreferrer');
   historyModal.prepend(cardLink);
-  let historyCard = document.createElement("img");
-  historyCard.setAttribute("src", `${cardImage}`);
-  historyCard.setAttribute("class", "historyCards");
+  let historyCard = document.createElement('img');
+  historyCard.setAttribute('src', `${cardImage}`);
+  historyCard.setAttribute('class', 'historyCards');
   cardLink.appendChild(historyCard);
-  let levelDiv = document.createElement("div");
-  levelDiv.setAttribute("class", "levelDiv");
+  let levelDiv = document.createElement('div');
+  levelDiv.setAttribute('class', 'levelDiv');
   historyModal.prepend(levelDiv);
-  let levelNode = document.createElement("p");
+  let levelNode = document.createElement('p');
   levelDiv.appendChild(levelNode);
   let historyLevel = document.createTextNode(`Level: `);
   levelNode.appendChild(historyLevel);
-  let levelSpanNode = document.createElement("span");
-  levelSpanNode.setAttribute("class", "levelColorText");
+  let levelSpanNode = document.createElement('span');
+  levelSpanNode.setAttribute('class', 'levelColorText');
   levelNode.appendChild(levelSpanNode);
   let historyLevelColor = document.createTextNode(`${level}`);
   levelSpanNode.appendChild(historyLevelColor);
-  let lineBreak = document.createElement("HR");
-  lineBreak.setAttribute("class", "lineBreaks");
+  let lineBreak = document.createElement('HR');
+  lineBreak.setAttribute('class', 'lineBreaks');
   historyModal.prepend(lineBreak);
-
-  // let cardLink = document.createElement("a");
-  // cardLink.setAttribute("href", `https://scryfall.com/cards/${card.id}`);
-  // cardLink.setAttribute("target", "_blank");
-  // cardLink.setAttribute("rel", "noreferrer");
-  // historyModal.appendChild(cardLink);
-  // let historyCard = document.createElement("img");
-  // historyCard.setAttribute("src", `${cardImage}`);
-  // historyCard.setAttribute("class", "historyCards");
-  // cardLink.appendChild(historyCard);
-  // let levelDiv = document.createElement("div");
-  // levelDiv.setAttribute("class", "levelDiv");
-  // historyModal.appendChild(levelDiv);
-  // let levelNode = document.createElement("p");
-  // levelDiv.appendChild(levelNode);
-  // let historyLevel = document.createTextNode(`Level: `);
-  // levelNode.appendChild(historyLevel);
-  // let levelSpanNode = document.createElement("span");
-  // levelSpanNode.setAttribute("class", "levelColorText");
-  // levelNode.appendChild(levelSpanNode);
-  // let historyLevelColor = document.createTextNode(`${level}`);
-  // levelSpanNode.appendChild(historyLevelColor);
-  // let lineBreak = document.createElement("HR");
-  // lineBreak.setAttribute("class", "lineBreaks");
-  // historyModal.appendChild(lineBreak);
 }
 
 // Remove the buttons for the next round
 function removeButtons() {
-  document.getElementById("getUserInput").innerHTML = "";
-}
-
-// Display the card image for the previous round
-function displayCard() {
-  let previousImage = document.getElementById("cardArt");
-  previousImage.setAttribute("src", `${cardArt}`);
-  previousImage.setAttribute("width", `250px`);
+  document.getElementById('getUserInput').innerHTML = '';
 }
 
 // Increment the level number and display the score
 function keepScore() {
   level++;
-  document.getElementById("scoreBox").innerHTML = `Level: ${level}`;
+  document.getElementById('scoreBox').innerHTML = `Level: ${level}`;
 }
 
 // Collect user input and check if correct
 function cardGuess() {
   let answer = cardName;
   if (guess === answer) {
-    document.getElementById("answerBox").style.display = "inline";
-    document.getElementById(
-      "answerBox"
-    ).innerHTML = `Correct! The previous card was ${answer}.`;
     seconds = 10;
     removeButtons();
-    displayCard();
     keepScore();
     nextRound();
   } else {
     // Highlight the correct answer
-    document.getElementById("correctGuessButton").style.borderColor = "red";
-    document.getElementById("answerBox").style.display = "none";
+    document.getElementById('correctGuessButton').style.borderColor = 'red';
     stopTimer(timer);
-    document.getElementById("guessButton1").disabled = true;
-    document.getElementById("guessButton2").disabled = true;
-    document.getElementById("guessButton3").disabled = true;
-    document.getElementById("correctGuessButton").disabled = true;
+    document.getElementById('guessButton1').disabled = true;
+    document.getElementById('guessButton2').disabled = true;
+    document.getElementById('guessButton3').disabled = true;
+    document.getElementById('correctGuessButton').disabled = true;
 
     enableHistoryButton();
     showRestartButton();
@@ -387,10 +362,10 @@ function cardGuess() {
 }
 
 function changeFormat() {
-  let modal = document.getElementById("diffModal");
-  modal.style.display = "inline";
-  let content = document.getElementById("content");
-  content.style.display = "none";
+  let modal = document.getElementById('diffModal');
+  modal.style.display = 'inline';
+  let content = document.getElementById('content');
+  content.style.display = 'none';
   removeButtons();
 }
 
@@ -399,5 +374,5 @@ init();
 
 // Always display the current year for the copyright
 document
-  .getElementById("year")
+  .getElementById('year')
   .appendChild(document.createTextNode(new Date().getFullYear()));
