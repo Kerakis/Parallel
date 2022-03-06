@@ -111,7 +111,7 @@ header {
   align-items: center;
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
+  justify-content: space-around;
   order: 5;
   width: 100%;
 }
@@ -202,8 +202,8 @@ header {
 
 .topContainer {
   display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
+  flex-flow: row wrap;
+  justify-content: space-around;
   margin: 1rem 0 0.5rem;
   order: 3;
   width: 100%;
