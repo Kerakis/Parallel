@@ -76,6 +76,7 @@ function restartGame() {
   historyModal.replaceChildren();
   disableHistoryButton();
   document.getElementById('timerBox').style.borderColor = '';
+  document.getElementById('congrats').innerHTML = 'What card has this art?';
 }
 
 // Disable history during gameplay
@@ -130,19 +131,20 @@ function timerStart() {
       // Highlight the correct answer
       document.getElementById('correctGuessButton').style.borderColor = 'red';
 
-      // Highlight the timer box
-      document.getElementById('timerBox').style.borderColor = 'red';
+      // Change button text
+      document.getElementById('timerBox').innerHTML = `Time's up!`;
+      document.getElementById('scoreBox').innerHTML = `History`;
 
       showRestartButton();
       showFormatButton();
+      congrats()
+      enableHistoryButton();
 
       // Prevent button clicking after loss
       document.getElementById('guessButton1').disabled = true;
       document.getElementById('guessButton2').disabled = true;
       document.getElementById('guessButton3').disabled = true;
       document.getElementById('correctGuessButton').disabled = true;
-
-      enableHistoryButton();
 
       historyModal.removeChild(historyModal.firstChild);
     } else {
@@ -337,6 +339,26 @@ function keepScore() {
   document.getElementById('scoreBox').innerHTML = `Level: ${level}`;
 }
 
+function congrats() {
+  if (level >= 100) {
+    document.getElementById(
+      'congrats'
+    ).innerHTML = `Incredible! You made it all the way to Level ${level}!`;
+  } else if (level >= 10 && level <= 99) {
+    document.getElementById(
+      'congrats'
+    ).innerHTML = `Fantastic! You made it to Level ${level}!`;
+  } else if (level >= 2 && level <= 9) {
+    document.getElementById(
+      'congrats'
+    ).innerHTML = `Congratulations! You made it to Level ${level}.`;
+  } else if (level === 1) {
+    document.getElementById(
+      'congrats'
+    ).innerHTML = `Oof! You couldn't get beyond Level ${level}.`;
+  }
+}
+
 // Collect user input and check if correct
 function cardGuess() {
   let answer = cardName;
@@ -354,6 +376,9 @@ function cardGuess() {
     document.getElementById('guessButton3').disabled = true;
     document.getElementById('correctGuessButton').disabled = true;
 
+    document.getElementById('scoreBox').innerHTML = `History`;
+
+    congrats()
     enableHistoryButton();
     showRestartButton();
     showFormatButton();
