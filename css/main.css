@@ -6,6 +6,7 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  height: 100%;
 }
 
 a:link,
@@ -20,6 +21,7 @@ body {
   background-color: #222;
   color: #fff;
   font-family: "Montserrat", sans-serif;
+  height: 100%;
 }
 
 button {
@@ -51,9 +53,8 @@ button:focus {
 }
 
 footer {
-  align-self: center;
-  order: 6;
-  position: relative;
+  position: sticky;
+  text-align: center;
 }
 
 h1 {
@@ -77,6 +78,40 @@ header {
   display: flex;
   flex-flow: column nowrap;
   order: 3;
+}
+
+.btn-close {
+  background-color: #d299ff;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border: 1px solid #d299ff;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: #d299ff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  height: 30px;
+  letter-spacing: 0.1rem;
+  line-height: 30px;
+  margin: 0.5rem;
+  padding: 0 20px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+  background-color: transparent;
+  border-color: #fff;
+  color: #d299ff;
+  outline: 0;
 }
 
 .buttonContainer {
@@ -123,6 +158,10 @@ header {
   width: 95%;
 }
 
+.historyCards {
+  max-width: 95%;
+}
+
 .infoContainer {
   align-content: center;
   align-items: center;
@@ -134,9 +173,46 @@ header {
   width: 100%;
 }
 
+.levelDiv {
+  text-align: left;
+  width: 100%;
+}
+
+.levelColorText {
+  color: #d299ff;
+}
+
+.lineBreaks {
+  color: #d299ff;
+  width: 100%;
+  margin: 1rem 0;
+  background-color: currentColor;
+  border: 0;
+  opacity: 1;
+}
+
+.lineBreaks:not([size]) {
+  height: 1px;
+}
+
+.modal-content {
+  background-color: #222;
+}
+
+.modal-header {
+  color: #d299ff;
+}
+
 .signature {
   font-size: 0.75rem;
-  margin: 0.25rem 0 0 0;
+}
+
+.topContainer {
+  justify-content: space-evenly;
+  display: flex;
+  flex-flow: row nowrap;
+  order: 3;
+  margin: 0 0 0.5rem 0;
 }
 
 #answerBox {
@@ -145,15 +221,10 @@ header {
 }
 
 #diffModal {
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
   overflow: auto;
-  background-color: rgb(0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.4);
+  text-align: center;
+  width: 100%;
+  z-index: 1;
 }
 
 #diffQuestion {
@@ -171,31 +242,39 @@ header {
   -webkit-text-stroke: 1px black;
 }
 
+#historyModalContent {
+  align-items: center;
+  display: flex;
+  flex-flow: column;
+}
+
 #imageContainer {
   margin-bottom: 1rem;
 }
 
 #modalContent {
-  align-items: center;
   align-content: center;
-  justify-content: space-around;
+  align-items: center;
   display: flex;
   flex-flow: column nowrap;
+  justify-content: space-around;
   margin: 15% auto;
   padding: 20px;
   width: 80%;
 }
 
-#scoreBox {
+#restart {
+  display: none;
+}
+
+#scoreBox,
+#timerBox {
   align-self: center;
-  visibility: hidden;
-  order: 3;
   background-color: transparent;
   border: 1px solid #d299ff;
   border-radius: 4px;
   box-sizing: border-box;
   color: #d299ff;
-  display: inline-block;
   font-family: inherit;
   font-size: 0.75rem;
   font-weight: 600;
@@ -203,6 +282,7 @@ header {
   letter-spacing: 0.1rem;
   line-height: 30px;
   margin: 0.5rem;
+  width: 110px;
   padding: 0 20px;
   text-align: center;
   text-decoration: none;
@@ -211,7 +291,9 @@ header {
 }
 
 #scoreBox:hover,
-#scoreBox:focus {
+#scoreBox:focus,
+#timerBox:hover,
+#timerBox:focus {
   border-color: #fff;
   outline: 0;
 }
@@ -223,6 +305,10 @@ header {
 }
 
 @media screen and (max-width: 695px) {
+  footer {
+    top: 100vh;
+  }
+
   .content {
     flex: auto;
     flex-shrink: 0;
@@ -284,13 +370,6 @@ header {
     margin: 0;
   }
 
-  #format {
-    right: 0;
-    margin: 10px 10px 0 0;
-    position: fixed;
-    top: 0;
-  }
-
   #flavorText {
     font-size: 1rem;
     font-style: italic;
@@ -301,6 +380,12 @@ header {
     margin: 10px 0 0 10px;
     position: fixed;
     top: 0;
-    visibility: hidden;
+  }
+
+  #timerBox {
+    right: 0;
+    margin: 10px 10px 0 0;
+    position: fixed;
+    top: 0;
   }
 }
