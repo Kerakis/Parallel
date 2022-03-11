@@ -129,7 +129,7 @@ function timerStart() {
       stopTimer(timer);
 
       // Highlight the correct answer
-      document.getElementById('correctGuessButton').style.borderColor = 'red';
+      document.getElementById('correctGuessButton').style.borderColor = '#fff';
 
       // Change button text
       document.getElementById('timerBox').innerHTML = `Time's up!`;
@@ -191,7 +191,7 @@ async function nextRound() {
     answerSelection(randomCardName1);
   });
   guessButton1.addEventListener('click', () => {
-    guessButton1.style.borderColor = '#fff';
+    guessButton1.style.borderColor = 'red';
   });
   document.getElementById('getUserInput').appendChild(guessButton1);
   guessButton2.setAttribute('class', `guessButtons`);
@@ -201,7 +201,7 @@ async function nextRound() {
     answerSelection(randomCardName2);
   });
   guessButton2.addEventListener('click', () => {
-    guessButton2.style.borderColor = '#fff';
+    guessButton2.style.borderColor = 'red';
   });
   document.getElementById('getUserInput').appendChild(guessButton2);
   guessButton3.setAttribute('class', `guessButtons`);
@@ -211,7 +211,7 @@ async function nextRound() {
     answerSelection(randomCardName3);
   });
   guessButton3.addEventListener('click', () => {
-    guessButton3.style.borderColor = '#fff';
+    guessButton3.style.borderColor = 'red';
   });
   document.getElementById('getUserInput').appendChild(guessButton3);
 
@@ -224,7 +224,7 @@ async function nextRound() {
     answerSelection(cardName);
   });
   correctGuessButton.addEventListener('click', () => {
-    correctGuessButton.style.borderColor = '#fff';
+    correctGuessButton.style.borderColor = 'red';
   });
   document.getElementById('getUserInput').appendChild(correctGuessButton);
 
@@ -369,7 +369,7 @@ function cardGuess() {
     nextRound();
   } else {
     // Highlight the correct answer
-    document.getElementById('correctGuessButton').style.borderColor = 'red';
+    document.getElementById('correctGuessButton').style.borderColor = '#fff';
     stopTimer(timer);
     document.getElementById('guessButton1').disabled = true;
     document.getElementById('guessButton2').disabled = true;
