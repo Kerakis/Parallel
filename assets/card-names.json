@@ -1,7 +1,7 @@
 {
   "object": "catalog",
   "uri": "https://api.scryfall.com/catalog/card-names",
-  "total_values": 24499,
+  "total_values": 24500,
   "data": [
     "\"Ach! Hans, Run!\"",
     "\"Rumors of My Death . . .\"",
@@ -4434,6 +4434,7 @@
     "Cryptic Gateway",
     "Cryptic Pursuit",
     "Cryptic Serpent",
+    "Cryptic Spires",
     "Cryptic Trilobite",
     "Cryptolith Fragment // Aurora of Emrakul",
     "Cryptolith Rite",
