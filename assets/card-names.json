@@ -1,7 +1,7 @@
 {
   "object": "catalog",
   "uri": "https://api.scryfall.com/catalog/card-names",
-  "total_values": 24737,
+  "total_values": 24738,
   "data": [
     "\"Ach! Hans, Run!\"",
     "\"Rumors of My Death . . .\"",
@@ -6527,6 +6527,7 @@
     "Engulfing Slagwurm",
     "Enhanced Awareness",
     "Enhanced Surveillance",
+    "Enhancement Stickers",
     "Enigma Drake",
     "Enigma Eidolon",
     "Enigma Sphinx",
