@@ -1,7 +1,7 @@
 {
   "object": "catalog",
   "uri": "https://api.scryfall.com/catalog/card-names",
-  "total_values": 25575,
+  "total_values": 25577,
   "data": [
     "\"Ach! Hans, Run!\"",
     "\"Brims\" Barone, Midway Mobster",
@@ -1142,6 +1142,7 @@
     "Ardent Soldier",
     "Ardenvale Paladin",
     "Ardenvale Tactician // Dizzying Swoop",
+    "Ardoz, Cobbler of War",
     "Arena",
     "Arena Athlete",
     "Arena Rector",
@@ -11206,6 +11207,7 @@
     "Isperia's Skywatch",
     "Isperia, Supreme Judge",
     "Isshin, Two Heavens as One",
+    "Isu the Abominable",
     "It Came from Planet Glurg",
     "It That Betrays",
     "It That Gets Left Hanging",
