@@ -1,7 +1,7 @@
 {
   "object": "catalog",
   "uri": "https://api.scryfall.com/catalog/card-names",
-  "total_values": 25849,
+  "total_values": 25850,
   "data": [
     "\"Ach! Hans, Run!\"",
     "\"Brims\" Barone, Midway Mobster",
@@ -11973,6 +11973,7 @@
     "Khorvath's Fury",
     "Khârn the Betrayer",
     "Kianne, Dean of Substance // Imbraham, Dean of Theory",
+    "Kibo, Uktabi Prince",
     "Kick in the Door",
     "Kiddie Coaster",
     "Kiki-Jiki, Mirror Breaker",
