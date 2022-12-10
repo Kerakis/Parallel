@@ -1,4 +1,10 @@
-import React, { useEffect, useReducer, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useReducer,
+  useRef,
+  useState,
+} from 'react';
 import './App.css';
 import HistoryModal from './HistoryModal';
 
@@ -329,8 +335,6 @@ function App() {
     const shuffledAnswers = shuffle(initialAnswers);
 
     setAnswers(shuffledAnswers);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     correctAnswer,
     incorrectAnswerOne,
@@ -338,12 +342,26 @@ function App() {
     incorrectAnswerTwo,
   ]);
 
+  const endGame = useCallback(() => {
+    setDisable(true);
+    setPlaying(false);
+    dispatch({ type: 'stop' });
+    if (level >= 100) {
+      setEndMessage(`Incredible! You made it all the way to Level ${level}!`);
+    } else if (level >= 10 && level <= 99) {
+      setEndMessage(`Fantastic! You made it to Level ${level}!`);
+    } else if (level >= 2 && level <= 9) {
+      setEndMessage(`Congratulations! You made it to Level ${level}.`);
+    } else if (level === 1) {
+      setEndMessage(`Oof! You couldn't get beyond Level ${level}.`);
+    }
+  }, [level]);
+
   useEffect(() => {
     if (state.time === 0) {
       endGame();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.time]);
+  }, [endGame, state.time]);
 
   const handleClick = (e) => {
     addToHistory();
@@ -426,21 +444,6 @@ function App() {
     newCards();
   };
 
-  const endGame = () => {
-    setDisable(true);
-    setPlaying(false);
-    dispatch({ type: 'stop' });
-    if (level >= 100) {
-      setEndMessage(`Incredible! You made it all the way to Level ${level}!`);
-    } else if (level >= 10 && level <= 99) {
-      setEndMessage(`Fantastic! You made it to Level ${level}!`);
-    } else if (level >= 2 && level <= 9) {
-      setEndMessage(`Congratulations! You made it to Level ${level}.`);
-    } else if (level === 1) {
-      setEndMessage(`Oof! You couldn't get beyond Level ${level}.`);
-    }
-  };
-
   const year = new Date().getFullYear();
 
   const buttonStyle =
@@ -451,11 +454,16 @@ function App() {
       <div>
         <header className="flex flex-col place-items-center">
           <h1 className="md:text-5xl text-3xl font-extrabold md:mt-8">
-            MTG Art Game
+            Parallel
           </h1>
           <h2 className="md:text-2xl text-l text-white md:mt-3 mt-2 mb-4">
-            Guess the card based on the art!
+            Magic: The Gathering Art Matching Game
           </h2>
+          {format !== null && (
+            <h3 className="md:text-xl text-l text-white md:mt-3 mt-2 mb-4">
+              Guess the card based on the art!
+            </h3>
+          )}
         </header>
       </div>
       <div>
