@@ -21,9 +21,54 @@ jobs:
           save-name: StandardAtomic
           set-output: false
 
+      - name: Fetch API Data 📦
+        uses: JamesIves/fetch-api-data-action@v2.2.4
+        with:
+          endpoint: https://mtgjson.com/api/v5/PauperAtomic.json
+          configuration: '{ "method": "GET" }'
+          save-location: assets
+          save-name: PauperAtomic
+          set-output: false
+
+      - name: Fetch API Data 📦
+        uses: JamesIves/fetch-api-data-action@v2.2.4
+        with:
+          endpoint: https://mtgjson.com/api/v5/PioneerAtomic.json
+          configuration: '{ "method": "GET" }'
+          save-location: assets
+          save-name: PioneerAtomic
+          set-output: false
+
+      - name: Fetch API Data 📦
+        uses: JamesIves/fetch-api-data-action@v2.2.4
+        with:
+          endpoint: https://mtgjson.com/api/v5/ModernAtomic.json
+          configuration: '{ "method": "GET" }'
+          save-location: assets
+          save-name: ModernAtomic
+          set-output: false
+
+      - name: Fetch API Data 📦
+        uses: JamesIves/fetch-api-data-action@v2.2.4
+        with:
+          endpoint: https://mtgjson.com/api/v5/LegacyAtomic.json
+          configuration: '{ "method": "GET" }'
+          save-location: assets
+          save-name: LegacyAtomic
+          set-output: false
+
+      - name: Fetch API Data 📦
+        uses: JamesIves/fetch-api-data-action@v2.2.4
+        with:
+          endpoint: https://mtgjson.com/api/v5/VintageAtomic.json
+          configuration: '{ "method": "GET" }'
+          save-location: assets
+          save-name: VintageAtomic
+          set-output: false
+
       - name: Build and Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.4.1
         with:
-          branch: gh-pages # Pushes the updates to the main branch.
-          folder: assets # The location of the data.json file saved by the Fetch API Data action.
-          target-folder: assets # Saves the data into the 'data' directory on the main branch.
+          branch: gh-pages # Pushes the updates to the gh-pages branch.
+          folder: assets # The location of the json files saved by the Fetch API Data action.
+          target-folder: assets # Saves the data into the 'assets' directory on the gh-pages branch.
