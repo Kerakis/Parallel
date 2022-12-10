@@ -70,7 +70,7 @@ function App() {
   const fetchStandard = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch(`./StandardAtomic.json`, {
+      const response = await fetch(`./assets/StandardAtomic.json`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -109,7 +109,7 @@ function App() {
   const fetchPauper = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch(`./PauperAtomic.json`, {
+      const response = await fetch(`./assets/PauperAtomic.json`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -148,7 +148,7 @@ function App() {
   const fetchPioneer = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch(`./PioneerAtomic.json`, {
+      const response = await fetch(`./assets/PioneerAtomic.json`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -187,7 +187,7 @@ function App() {
   const fetchModern = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch(`./ModernAtomic.json`, {
+      const response = await fetch(`./assets/ModernAtomic.json`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -226,7 +226,7 @@ function App() {
   const fetchLegacy = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch(`./LegacyAtomic.json`, {
+      const response = await fetch(`./assets/LegacyAtomic.json`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -265,7 +265,7 @@ function App() {
   const fetchVintage = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch(`./VintageAtomic.json`, {
+      const response = await fetch(`./assets/VintageAtomic.json`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
