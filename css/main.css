@@ -179,7 +179,7 @@ header {
   color: #d299ff;
   width: 100%;
   margin: 1rem 0;
-  background-color: currentColor;
+  background-color: #d299ff;
   border: 0;
   opacity: 1;
 }
@@ -391,3 +391,15 @@ header {
     font-style: italic;
   }
 }
+
+/* This is the line break problem */
+
+/* .modal-fullscreen-sm-down .modal-body {
+  overflow-y: visible;
+}
+
+@media (max-width: 575.98px) {
+  .modal-fullscreen-sm-down .modal-body {
+    overflow-y: visible;
+  }
+} */
