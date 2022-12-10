@@ -24,3 +24,4 @@ jobs:
         with:
           branch: gh-pages # Pushes the updates to the gh-pages branch.
           folder: public # The location of the data.json file saved by the Fetch API Data action.
+          target-folder: public # Saves the data into the 'data' directory on the main branch.
