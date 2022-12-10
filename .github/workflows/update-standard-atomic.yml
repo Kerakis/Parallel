@@ -17,11 +17,11 @@ jobs:
         uses: gautemo/fetch-api-data-action@1.1.0
         with:
           url: 'https://mtgjson.com/api/v5/StandardAtomic.json'
-          file: 'Test.json'
+          file: 'assets/Test.json'
 
-      # - name: Deploy to GitHub Pages
-      #   uses: JamesIves/github-pages-deploy-action@v4.4.1
-      #   with:
-      #     branch: gh-pages # Pushes the updates to the gh-pages branch.
-      #     folder: . # The location of the data.json file saved by the Fetch API Data action.
-      #     target-folder: . # Saves the data into the 'data' directory on the main branch.
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4.4.1
+        with:
+          branch: main # Pushes the updates to the main branch.
+          folder: assets # The location of the data.json file saved by the Fetch API Data action.
+          target-folder: assets # Saves the data into the 'data' directory on the main branch.
