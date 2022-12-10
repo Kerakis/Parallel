@@ -1,0 +1,5 @@
+- name: Fetch Data to File
+  uses: gautemo/fetch-api-data-action@1.1.0
+  with:
+    url: 'https://mtgjson.com/api/v5/StandardAtomic.json'
+    file: 'assets/TestStandard.json'
