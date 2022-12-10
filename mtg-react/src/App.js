@@ -100,6 +100,45 @@ function App() {
     }
   };
 
+  const fetchPauper = async () => {
+    try {
+      setIsLoading(true);
+      const response = await fetch(`./PauperAtomic.json`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`${response.status}`);
+      } else if (response.ok) {
+        setError(null);
+      }
+
+      const result = await response.json();
+      setCardPool(Object.keys(result.data));
+
+      let randomCardArray = Object.keys(result.data);
+      setRandomCardArray(
+        Array.from({ length: 4 }, () =>
+          Math.floor(Math.random() * randomCardArray.length)
+        )
+      );
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+      setFormat('Pauper');
+      setLevel(1);
+      setPlaying(true);
+      setShowGame(true);
+      setDisable(false);
+      dispatch({ type: 'start' });
+    }
+  };
+
   const fetchPioneer = async () => {
     try {
       setIsLoading(true);
@@ -440,6 +479,13 @@ function App() {
                 onClick={fetchStandard}
               >
                 Standard
+              </button>
+              <button
+                type="submit"
+                className={`${buttonStyle} text-sm min-w-full`}
+                onClick={fetchPauper}
+              >
+                Pauper
               </button>
               <button
                 type="submit"
