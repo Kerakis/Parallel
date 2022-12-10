@@ -37,11 +37,11 @@ jobs:
           url: 'https://mtgjson.com/api/v5/ModernAtomic.json'
           file: 'assets/TestModern.json'
 
-      #  - name: Fetch Data to File
-      #   uses: gautemo/fetch-api-data-action@1.1.0
-      #   with:
-      #     url: 'https://mtgjson.com/api/v5/LegacyAtomic.json'
-      #     file: 'assets/TestLegacy.json'
+      - name: Fetch Data to File
+        uses: gautemo/fetch-api-data-action@1.1.0
+        with:
+          url: 'https://mtgjson.com/api/v5/LegacyAtomic.json'
+          file: 'assets/TestLegacy.json'
 
       #  - name: Fetch Data to File
       #   uses: gautemo/fetch-api-data-action@1.1.0
