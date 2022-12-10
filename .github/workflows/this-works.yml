@@ -26,4 +26,4 @@ jobs:
         with:
           branch: gh-pages # Pushes the updates to the main branch.
           folder: assets # The location of the data.json file saved by the Fetch API Data action.
-          target-folder: asset # Saves the data into the 'data' directory on the main branch.
+          target-folder: assets # Saves the data into the 'data' directory on the main branch.
