@@ -13,41 +13,41 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Fetch Data to File
-        uses: gautemo/fetch-api-data-action@1.1.0
-        with:
-          url: 'https://mtgjson.com/api/v5/StandardAtomic.json'
-          file: 'assets/TestStandard.json'
+      # - name: Fetch Data to File
+      #   uses: gautemo/fetch-api-data-action@1.1.0
+      #   with:
+      #     url: 'https://mtgjson.com/api/v5/StandardAtomic.json'
+      #     file: 'assets/StandardAtomic.json'
 
-      - name: Fetch Data to File
-        uses: gautemo/fetch-api-data-action@1.1.0
-        with:
-          url: 'https://mtgjson.com/api/v5/PauperAtomic.json'
-          file: 'assets/TestPauper.json'
+      # - name: Fetch Data to File
+      #   uses: gautemo/fetch-api-data-action@1.1.0
+      #   with:
+      #     url: 'https://mtgjson.com/api/v5/PauperAtomic.json'
+      #     file: 'assets/PauperAtomic.json'
 
-      - name: Fetch Data to File
-        uses: gautemo/fetch-api-data-action@1.1.0
-        with:
-          url: 'https://mtgjson.com/api/v5/PioneerAtomic.json'
-          file: 'assets/TestPioneer.json'
+      # - name: Fetch Data to File
+      #   uses: gautemo/fetch-api-data-action@1.1.0
+      #   with:
+      #     url: 'https://mtgjson.com/api/v5/PioneerAtomic.json'
+      #     file: 'assets/PioneerAtomic.json'
 
-      - name: Fetch Data to File
-        uses: gautemo/fetch-api-data-action@1.1.0
-        with:
-          url: 'https://mtgjson.com/api/v5/ModernAtomic.json'
-          file: 'assets/TestModern.json'
+      # - name: Fetch Data to File
+      #   uses: gautemo/fetch-api-data-action@1.1.0
+      #   with:
+      #     url: 'https://mtgjson.com/api/v5/ModernAtomic.json'
+      #     file: 'assets/ModernAtomic.json'
 
-      - name: Fetch Data to File
-        uses: gautemo/fetch-api-data-action@1.1.0
-        with:
-          url: 'https://mtgjson.com/api/v5/LegacyAtomic.json'
-          file: 'assets/TestLegacy.json'
+      # - name: Fetch Data to File
+      #   uses: gautemo/fetch-api-data-action@1.1.0
+      #   with:
+      #     url: 'https://mtgjson.com/api/v5/LegacyAtomic.json'
+      #     file: 'assets/LegacyAtomic.json'
 
       - name: Fetch Data to File
         uses: gautemo/fetch-api-data-action@1.1.0
         with:
           url: 'https://mtgjson.com/api/v5/VintageAtomic.json'
-          file: 'assets/TestVintage.json'
+          file: 'assets/VintageAtomic.json'
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4.4.1
@@ -55,56 +55,3 @@ jobs:
           branch: gh-pages # Pushes the updates to the gh-pages branch.
           folder: assets # The location of the json files saved by the Fetch Data to API actions.
           target-folder: assets # Saves the data into the 'assets' directory on the main branch.
-
-
-      # - name: Fetch Data to File
-      #   uses: gautemo/fetch-api-data-action@1.1.0
-      #   with:
-      #     url: 'https://mtgjson.com/api/v5/StandardAtomic.json'
-      #     file: 'assets/TestStandard.json'
-      #     url: 'https://mtgjson.com/api/v5/PauperAtomic.json'
-      #     file: 'assets/TestPauper.json'
-      #     url: 'https://mtgjson.com/api/v5/PioneerAtomic.json'
-      #     file: 'assets/TestPioneer.json'
-      #     url: 'https://mtgjson.com/api/v5/ModernAtomic.json'
-      #     file: 'assets/TestModern.json'
-      #     url: 'https://mtgjson.com/api/v5/LegacyAtomic.json'
-      #     file: 'assets/TestLegacy.json'
-      #     url: 'https://mtgjson.com/api/v5/VintageAtomic.json'
-      #     file: 'assets/TestVintage.json'
-
-      # - name: Fetch Data to File
-      #   uses: gautemo/fetch-api-data-action@1.1.0
-      #   with:
-      #     url: 'https://mtgjson.com/api/v5/StandardAtomic.json'
-      #     file: 'assets/TestStandard.json'
-
-      # - name: Fetch Data to File
-      #   uses: gautemo/fetch-api-data-action@1.1.0
-      #   with:
-      #     url: 'https://mtgjson.com/api/v5/PauperAtomic.json'
-      #     file: 'assets/TestPauper.json'
-
-      #  - name: Fetch Data to File
-      #   uses: gautemo/fetch-api-data-action@1.1.0
-      #   with:
-      #     url: 'https://mtgjson.com/api/v5/PioneerAtomic.json'
-      #     file: 'assets/TestPioneer.json'
-
-      #  - name: Fetch Data to File
-      #   uses: gautemo/fetch-api-data-action@1.1.0
-      #   with:
-      #     url: 'https://mtgjson.com/api/v5/ModernAtomic.json'
-      #     file: 'assets/TestModern.json'
-
-      #  - name: Fetch Data to File
-      #   uses: gautemo/fetch-api-data-action@1.1.0
-      #   with:
-      #     url: 'https://mtgjson.com/api/v5/LegacyAtomic.json'
-      #     file: 'assets/TestLegacy.json'
-
-      #  - name: Fetch Data to File
-      #   uses: gautemo/fetch-api-data-action@1.1.0
-      #   with:
-      #     url: 'https://mtgjson.com/api/v5/VintageAtomic.json'
-      #     file: 'assets/TestVintage.json'
