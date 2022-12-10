@@ -1,4 +1,4 @@
-name: Update Standard Atomic Catalog
+name: Update Atomic Catalog
 on:
   schedule:
     - cron: 0 0 * * MON
@@ -18,34 +18,14 @@ jobs:
         with:
           url: 'https://mtgjson.com/api/v5/StandardAtomic.json'
           file: 'assets/TestStandard.json'
-
-      - name: Fetch Data to File
-        uses: gautemo/fetch-api-data-action@1.1.0
-        with:
           url: 'https://mtgjson.com/api/v5/PauperAtomic.json'
           file: 'assets/TestPauper.json'
-
-       - name: Fetch Data to File
-        uses: gautemo/fetch-api-data-action@1.1.0
-        with:
           url: 'https://mtgjson.com/api/v5/PioneerAtomic.json'
           file: 'assets/TestPioneer.json'
-
-       - name: Fetch Data to File
-        uses: gautemo/fetch-api-data-action@1.1.0
-        with:
           url: 'https://mtgjson.com/api/v5/ModernAtomic.json'
           file: 'assets/TestModern.json'
-
-       - name: Fetch Data to File
-        uses: gautemo/fetch-api-data-action@1.1.0
-        with:
           url: 'https://mtgjson.com/api/v5/LegacyAtomic.json'
           file: 'assets/TestLegacy.json'
-
-       - name: Fetch Data to File
-        uses: gautemo/fetch-api-data-action@1.1.0
-        with:
           url: 'https://mtgjson.com/api/v5/VintageAtomic.json'
           file: 'assets/TestVintage.json'
 
@@ -53,5 +33,42 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4.4.1
         with:
           branch: gh-pages # Pushes the updates to the gh-pages branch.
-          folder: assets # The location of the data.json file saved by the Fetch API Data action.
-          target-folder: assets # Saves the data into the 'data' directory on the main branch.
+          folder: assets # The location of the json files saved by the Fetch Data to API actions.
+          target-folder: assets # Saves the data into the 'assets' directory on the main branch.
+
+
+      # - name: Fetch Data to File
+      #   uses: gautemo/fetch-api-data-action@1.1.0
+      #   with:
+      #     url: 'https://mtgjson.com/api/v5/StandardAtomic.json'
+      #     file: 'assets/TestStandard.json'
+
+      # - name: Fetch Data to File
+      #   uses: gautemo/fetch-api-data-action@1.1.0
+      #   with:
+      #     url: 'https://mtgjson.com/api/v5/PauperAtomic.json'
+      #     file: 'assets/TestPauper.json'
+
+      #  - name: Fetch Data to File
+      #   uses: gautemo/fetch-api-data-action@1.1.0
+      #   with:
+      #     url: 'https://mtgjson.com/api/v5/PioneerAtomic.json'
+      #     file: 'assets/TestPioneer.json'
+
+      #  - name: Fetch Data to File
+      #   uses: gautemo/fetch-api-data-action@1.1.0
+      #   with:
+      #     url: 'https://mtgjson.com/api/v5/ModernAtomic.json'
+      #     file: 'assets/TestModern.json'
+
+      #  - name: Fetch Data to File
+      #   uses: gautemo/fetch-api-data-action@1.1.0
+      #   with:
+      #     url: 'https://mtgjson.com/api/v5/LegacyAtomic.json'
+      #     file: 'assets/TestLegacy.json'
+
+      #  - name: Fetch Data to File
+      #   uses: gautemo/fetch-api-data-action@1.1.0
+      #   with:
+      #     url: 'https://mtgjson.com/api/v5/VintageAtomic.json'
+      #     file: 'assets/TestVintage.json'
