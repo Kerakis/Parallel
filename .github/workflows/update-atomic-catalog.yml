@@ -31,11 +31,11 @@ jobs:
           url: 'https://mtgjson.com/api/v5/PioneerAtomic.json'
           file: 'assets/TestPioneer.json'
 
-      #  - name: Fetch Data to File
-      #   uses: gautemo/fetch-api-data-action@1.1.0
-      #   with:
-      #     url: 'https://mtgjson.com/api/v5/ModernAtomic.json'
-      #     file: 'assets/TestModern.json'
+      - name: Fetch Data to File
+        uses: gautemo/fetch-api-data-action@1.1.0
+        with:
+          url: 'https://mtgjson.com/api/v5/ModernAtomic.json'
+          file: 'assets/TestModern.json'
 
       #  - name: Fetch Data to File
       #   uses: gautemo/fetch-api-data-action@1.1.0
