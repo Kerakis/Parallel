@@ -16,7 +16,10 @@ jobs:
         uses: JamesIves/fetch-api-data-action@v2.2.4
         with:
           endpoint: https://mtgjson.com/api/v5/StandardAtomic.json
+          configuration: '{ "method": "GET" }'
+          save-location: assets
           save-name: StandardAtomic
+          set-output: false
 
       - name: Build and Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.4.1
