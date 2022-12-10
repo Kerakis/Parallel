@@ -49,12 +49,12 @@ jobs:
   #        url: 'https://mtgjson.com/api/v5/VintageAtomic.json'
   #        file: 'assets/TestVintage.json'
   #
-  #    - name: Deploy to GitHub Pages
-  #      uses: JamesIves/github-pages-deploy-action@v4.4.1
-  #      with:
-  #        branch: gh-pages # Pushes the updates to the gh-pages branch.
-  #        folder: assets # The location of the json files saved by the Fetch Data to API actions.
-  #        target-folder: assets # Saves the data into the 'assets' directory on the main branch.
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4.4.1
+        with:
+          branch: gh-pages # Pushes the updates to the gh-pages branch.
+          folder: assets # The location of the json files saved by the Fetch Data to API actions.
+          target-folder: assets # Saves the data into the 'assets' directory on the main branch.
 
           
       # - name: Fetch Data to File
