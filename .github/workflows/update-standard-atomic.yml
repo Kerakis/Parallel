@@ -23,4 +23,4 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4.2.5
         with:
           branch: gh-pages # Pushes the updates to the gh-pages branch.
-          folder: . # The location of the data.json file saved by the Fetch API Data action.
+          folder: public # The location of the data.json file saved by the Fetch API Data action.
