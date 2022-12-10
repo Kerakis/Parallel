@@ -25,29 +25,29 @@ jobs:
           url: 'https://mtgjson.com/api/v5/PauperAtomic.json'
           file: 'assets/TestPauper.json'
 
-      - name: Fetch Data to File
-        uses: gautemo/fetch-api-data-action@1.1.0
-        with:
-          url: 'https://mtgjson.com/api/v5/PioneerAtomic.json'
-          file: 'assets/TestPioneer.json'
+      # - name: Fetch Data to File
+      #   uses: gautemo/fetch-api-data-action@1.1.0
+      #   with:
+      #     url: 'https://mtgjson.com/api/v5/PioneerAtomic.json'
+      #     file: 'assets/TestPioneer.json'
+
+      # - name: Fetch Data to File
+      #   uses: gautemo/fetch-api-data-action@1.1.0
+      #   with:
+      #     url: 'https://mtgjson.com/api/v5/ModernAtomic.json'
+      #     file: 'assets/TestModern.json'
 
       - name: Fetch Data to File
         uses: gautemo/fetch-api-data-action@1.1.0
         with:
-          url: 'https://mtgjson.com/api/v5/ModernAtomic.json'
-          file: 'assets/TestModern.json'
+          url: 'https://mtgjson.com/api/v5/LegacyAtomic.json'
+          file: 'assets/TestLegacy.json'
 
       - name: Fetch Data to File
         uses: gautemo/fetch-api-data-action@1.1.0
         with:
           url: 'https://mtgjson.com/api/v5/VintageAtomic.json'
           file: 'assets/TestVintage.json'
-
-      #  - name: Fetch Data to File
-      #   uses: gautemo/fetch-api-data-action@1.1.0
-      #   with:
-      #     url: 'https://mtgjson.com/api/v5/VintageAtomic.json'
-      #     file: 'assets/TestVintage.json'
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4.4.1
