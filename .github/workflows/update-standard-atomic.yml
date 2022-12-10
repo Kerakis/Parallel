@@ -20,7 +20,7 @@ jobs:
           file: 'Test.json'
 
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4.2.5
+        uses: JamesIves/github-pages-deploy-action@v4.4.1
         with:
           branch: gh-pages # Pushes the updates to the gh-pages branch.
           folder: . # The location of the data.json file saved by the Fetch API Data action.
