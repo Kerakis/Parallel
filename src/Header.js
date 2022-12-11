@@ -7,7 +7,7 @@ function Header(format) {
         Parallel
       </h1>
       <h2 className="md:text-2xl text-xl text-white text-center md:mt-3 mt-2 mb-4">
-        Magic: The Gathering Art Matching Game
+        The Magic: The Gathering Art Matching Game
       </h2>
       {format !== null && (
         <h3 className="md:text-xl text-l text-white text-center md:mt-3 mt-2 mb-4">
