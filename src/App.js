@@ -454,21 +454,25 @@ function App() {
     <div className="flex flex-col place-items-center text-light-purple m-4">
       <div>
         <header className="flex flex-col place-items-center">
-          <h1 className="md:text-5xl text-3xl font-extrabold md:mt-8">
+          <h1 className="md:text-5xl text-3xl text-center font-extrabold md:mt-8">
             Parallel
           </h1>
-          <h2 className="md:text-2xl text-l text-white md:mt-3 mt-2 mb-4">
+          <h2 className="md:text-2xl text-xl text-white text-center md:mt-3 mt-2 mb-4">
             Magic: The Gathering Art Matching Game
           </h2>
           {format !== null && (
-            <h3 className="md:text-xl text-l text-white md:mt-3 mt-2 mb-4">
+            <h3 className="md:text-xl text-l text-white text-center md:mt-3 mt-2 mb-4">
               Guess the card based on the art!
             </h3>
           )}
         </header>
       </div>
       <div>
-        {isLoading && <h1 className="text-center mt-4">Loading cards...</h1>}
+        {isLoading && (
+          <h1 className="text-center mt-4">
+            Loading cards. This may take a moment.
+          </h1>
+        )}
         {error && (
           <h1 className="text-center mt-4">
             Hmm. Something went wrong. Status: {error}
@@ -529,20 +533,19 @@ function App() {
         </div>
       )}
 
-      <div className="w-full md:w-[768px]">
+      <div className="w-full">
         {showGame && (
           <div className="w-full">
             <div className="flex justify-center">
               <img
                 src={cardArt}
                 alt="Guess the card based on the artwork!"
-                className="max-h-80 md:max-h-full"
               ></img>
             </div>
           </div>
         )}
         {showGame && (
-          <div className="md:w-2/3 mx-auto">
+          <div className="mx-auto max-w-screen-sm">
             {cardFlavor && (
               <div className="text-center italic mt-2">{cardFlavor}</div>
             )}
@@ -551,70 +554,74 @@ function App() {
                 {endMessage}
               </div>
             )}
-            {answers !== null && (
-              <div className="flex flex-col px-0 mb-2 md:justify-items-center text-xs">
-                {answers.map((answer) => {
-                  return (
-                    <button
-                      className={`overflow-hidden ${buttonStyle} ${
-                        answer.label.length >= 45 ? 'xs:text-xxs' : 'text-xs'
-                      } ${answer.index === 3 && !playing && 'border-red-500'} ${
-                        answer.label === selectedAnswer &&
-                        !playing &&
-                        'border-white'
-                      }`}
-                      key={answer.index}
-                      onClick={(e) => handleClick(e.target.value)}
-                      disabled={disable}
-                      value={answer.label}
-                    >
-                      {answer.label}
-                    </button>
-                  );
-                })}
-              </div>
-            )}
-            {format !== null && (
-              <div className="grid grid-cols-2 content-between mt-4 md:mt-8">
-                <button
-                  className={`${buttonStyle} xs:text-xxs text-xs overflow-hidden w-3/4 justify-self-start`}
-                  disabled={!disable}
-                  onClick={() => setHistoryModalOpen(true)}
-                >
-                  {playing ? `Level: ${level}` : `History`}
-                </button>
-                <button
-                  className={`${buttonStyle} xs:text-xxs text-xs overflow-hidden w-3/4 justify-self-end ${
-                    state.time < 4 && 'text-red-500'
-                  }`}
-                  disabled
-                >
-                  {state.time === 0
-                    ? `Time's Up!`
-                    : `00:${state.time.toString().padStart(2, '0')}`}
-                </button>
-              </div>
-            )}
-            {!playing && format !== null && (
-              <div className="grid grid-cols-2 content-between">
-                <button
-                  className={`${buttonStyle} xs:text-xxs text-xs overflow-hidden w-3/4 justify-self-start`}
-                  onClick={restartGame}
-                >
-                  Restart Game
-                </button>
-                <button
-                  className={`${buttonStyle} xs:text-xxs overflow-hidden text-xs w-3/4  justify-self-end`}
-                  onClick={changeFormat}
-                >
-                  Change Format
-                </button>
-              </div>
-            )}
+            <div className="max-w-lg mx-auto">
+              {answers !== null && (
+                <div className="flex flex-col px-0 mb-2 text-xs justify-items-center">
+                  {answers.map((answer) => {
+                    return (
+                      <button
+                        className={`overflow-hidden ${buttonStyle} ${
+                          answer.label.length >= 45 ? 'xs:text-xxs' : 'text-xs'
+                        } ${
+                          answer.index === 3 && !playing && 'border-red-500'
+                        } ${
+                          answer.label === selectedAnswer &&
+                          !playing &&
+                          'border-white'
+                        }`}
+                        key={answer.index}
+                        onClick={(e) => handleClick(e.target.value)}
+                        disabled={disable}
+                        value={answer.label}
+                      >
+                        {answer.label}
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+              {format !== null && (
+                <div className="grid grid-cols-2 content-between mt-4 md:mt-8">
+                  <button
+                    className={`${buttonStyle} xs:text-xxs text-xs overflow-hidden w-3/4 justify-self-start`}
+                    disabled={!disable}
+                    onClick={() => setHistoryModalOpen(true)}
+                  >
+                    {playing ? `Level: ${level}` : `History`}
+                  </button>
+                  <button
+                    className={`${buttonStyle} xs:text-xxs text-xs overflow-hidden w-3/4 justify-self-end ${
+                      state.time < 4 && 'text-red-500'
+                    }`}
+                    disabled
+                  >
+                    {state.time === 0
+                      ? `Time's Up!`
+                      : `00:${state.time.toString().padStart(2, '0')}`}
+                  </button>
+                </div>
+              )}
+              {!playing && format !== null && (
+                <div className="grid grid-cols-2 content-between">
+                  <button
+                    className={`${buttonStyle} xs:text-xxs text-xs overflow-hidden w-3/4 justify-self-start`}
+                    onClick={restartGame}
+                  >
+                    Restart Game
+                  </button>
+                  <button
+                    className={`${buttonStyle} xs:text-xxs overflow-hidden text-xs w-3/4  justify-self-end`}
+                    onClick={changeFormat}
+                  >
+                    Change Format
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         )}
       </div>
-      <footer className="mx-auto relative bottom-0 mt-12 text-sm text-white md:fixed md:m-1 md:right-1">
+      <footer className="mx-auto relative bottom-0 mt-8 text-sm text-white text-center md:fixed md:m-1 md:right-1">
         <p>
           Made with <span className="font-sans">&#9749;</span> by
           <a
