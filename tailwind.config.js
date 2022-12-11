@@ -5,7 +5,8 @@ module.exports = {
     extend: {
       colors: {
         'theme-color': '#00a2e8',
-        'light-grey': '#222',
+        'light-gray': '#e3e3e3',
+        'dark-gray': '#222',
       },
       fontSize: {
         xxs: '0.6rem',

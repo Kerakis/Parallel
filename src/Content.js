@@ -12,6 +12,7 @@ function Content() {
   const [cardPool, setCardPool] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [cardIsLoading, setCardIsLoading] = useState(false);
   const [disable, setDisable] = useState(false);
   const [level, setLevel] = useState(0);
   const [playing, setPlaying] = useState(false);
@@ -36,7 +37,7 @@ function Content() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const timerRef = useRef(0);
 
-  const toggleModal = React.useCallback(() => {
+  const toggleModal = useCallback(() => {
     setHistoryModalOpen((prevState) => !prevState);
   }, []);
 
@@ -61,7 +62,7 @@ function Content() {
       case 'reset':
         return { isRunning: false, time: 10 };
       case 'tick': {
-        if (state.time > 0) {
+        if (state.time > 0 && !cardIsLoading) {
           return { ...state, time: state.time - 1 };
         } else return { ...state, time: state.time };
       }
@@ -406,6 +407,7 @@ function Content() {
     const fetchArt = async () => {
       if (correctAnswer !== null) {
         try {
+          setCardIsLoading(true);
           const response = await fetch(
             `https://api.scryfall.com/cards/named?fuzzy=${correctAnswer}`
           );
@@ -435,6 +437,8 @@ function Content() {
           }
         } catch (err) {
           setError(err.message);
+        } finally {
+          setCardIsLoading(false);
         }
       }
     };
@@ -449,7 +453,7 @@ function Content() {
   };
 
   const buttonStyle =
-    'border border-solid border-theme-color rounded h-8 mt-4 uppercase font-extrabold whitespace-nowrap';
+    'border border-theme-color rounded h-8 mt-4 uppercase font-extrabold whitespace-nowrap';
 
   return (
     <div className="flex flex-col flex-1">
@@ -522,10 +526,11 @@ function Content() {
       <div className="w-full">
         {showGame && (
           <div className="w-full">
-            <div className="flex justify-center">
+            <div className="flex mx-auto justify-center xs:max-h-96">
               <img
                 src={cardArt}
                 alt="Guess the card based on the artwork!"
+                className="object-scale-down"
               ></img>
             </div>
           </div>
@@ -536,7 +541,7 @@ function Content() {
               <div className="text-center italic mt-2">{cardFlavor}</div>
             )}
             {!playing && (
-              <div className="text-white text-lg text-center mt-4">
+              <div className="text-dark-gray dark:text-white text-lg text-center mt-4">
                 {endMessage}
               </div>
             )}
@@ -547,6 +552,9 @@ function Content() {
                     return (
                       <button
                         className={`overflow-hidden ${buttonStyle} ${
+                          playing &&
+                          'hover:border-dark-gray dark:hover:border-white duration-100'
+                        } ${
                           answer.label.length >= 45
                             ? 'xs:text-xxs'
                             : 'text-xs md:text-sm'
@@ -555,7 +563,7 @@ function Content() {
                         } ${
                           answer.label === selectedAnswer &&
                           !playing &&
-                          'border-white'
+                          'border-dark-gray dark:border-white'
                         }`}
                         key={answer.index}
                         onClick={(e) => handleClick(e.target.value)}
@@ -571,14 +579,20 @@ function Content() {
               {format !== null && (
                 <div className="grid grid-cols-2 content-between mt-4 md:mt-8">
                   <button
-                    className={`${buttonStyle} xs:text-xxs text-xs md:text-sm overflow-hidden w-3/4 justify-self-start`}
+                    className={`${buttonStyle} ${
+                      !playing &&
+                      'hover:border-dark-gray dark:hover:border-white duration-200'
+                    } xs:text-xxs text-xs md:text-sm overflow-hidden w-3/4 justify-self-start`}
                     disabled={!disable}
                     onClick={() => setHistoryModalOpen(true)}
                   >
                     {playing ? `Level: ${level}` : `History`}
                   </button>
                   <button
-                    className={`${buttonStyle} xs:text-xxs text-xs md:text-sm overflow-hidden w-3/4 justify-self-end ${
+                    className={`${buttonStyle} ${
+                      !playing &&
+                      'hover:border-dark-gray dark:hover:border-white duration-200'
+                    } xs:text-xxs text-xs md:text-sm overflow-hidden w-3/4 justify-self-end ${
                       state.time < 4 && 'text-red-500'
                     }`}
                     disabled
@@ -592,13 +606,19 @@ function Content() {
               {!playing && format !== null && (
                 <div className="grid grid-cols-2 content-between">
                   <button
-                    className={`${buttonStyle} xs:text-xxs text-xs md:text-sm overflow-hidden w-3/4 justify-self-start`}
+                    className={`${buttonStyle} ${
+                      !playing &&
+                      'hover:border-dark-gray dark:hover:border-white duration-200'
+                    } xs:text-xxs text-xs md:text-sm overflow-hidden w-3/4 justify-self-start`}
                     onClick={restartGame}
                   >
                     Restart Game
                   </button>
                   <button
-                    className={`${buttonStyle} xs:text-xxs text-xs md:text-sm overflow-hidden w-3/4  justify-self-end`}
+                    className={`${buttonStyle} ${
+                      !playing &&
+                      'hover:border-dark-gray dark:hover:border-white duration-200'
+                    } xs:text-xxs text-xs md:text-sm overflow-hidden w-3/4  justify-self-end`}
                     onClick={changeFormat}
                   >
                     Change Format

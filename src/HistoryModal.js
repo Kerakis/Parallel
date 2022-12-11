@@ -49,12 +49,12 @@ function HistoryModal({
             ref={modalRef}
             className="flex items-center relative transform-none w-screen max-w-none h-full min-h-[calc(100%-1rem)] m-0 sm:mt-7 sm:max-w-lg sm:w-auto sm:m-auto sm:min-h-[calc(100%-3.5rem)] sm:h-[calc(100%-3.5rem)] lg:max-w-3xl"
           >
-            <div className="flex flex-col relative bg-clip-padding bg-light-grey rounded xs:rounded-none w-full xs:h-full md:w-[50rem] max-h-full overflow-hidden">
-              <div className="flex flex-shrink-0 border-b border-b-white w-full p-4 justify-between items-center text-xl font-bold text-theme-color">
+            <div className="flex flex-col relative bg-clip-padding bg-light-gray dark:bg-dark-gray rounded xs:rounded-none w-full xs:h-full md:w-[50rem] max-h-full overflow-hidden">
+              <div className="flex flex-shrink-0 border-b border-b-dark-gray dark:border-b-white w-full p-4 justify-between items-center text-xl font-bold text-theme-color">
                 <h3>History</h3>
                 <button
                   type="button"
-                  className="flex justify-center flex-row text-light-grey bg-theme-color bg-opacity-60 rounded cursor-pointer hover:bg-opacity-80 duration-200 w-7 h-7"
+                  className="flex justify-center flex-row text-light-gray dark:text-dark-gray bg-theme-color bg-opacity-60 rounded cursor-pointer hover:bg-opacity-80 duration-200 w-7 h-7"
                   onClick={toggleModal}
                 >
                   X
@@ -66,7 +66,10 @@ function HistoryModal({
                     <div key={history.id} className="history w-full">
                       <div>
                         <div className="text-theme-color w-full mb-5">
-                          Level: <span className="text-white">{count--}</span>
+                          Level:{' '}
+                          <span className="text-dark-gray dark:text-white">
+                            {count--}
+                          </span>
                         </div>
                         <div className="flex flex-col items-center">
                           <a
@@ -92,9 +95,9 @@ function HistoryModal({
                   ))}
                 </>
               </div>
-              <div className="flex flex-wrap flex-shrink-0 justify-end items-center p-3 border-t border-t-white">
+              <div className="flex flex-wrap flex-shrink-0 justify-end items-center p-3 border-t border-t-dark-gray dark:border-t-white">
                 <button
-                  className="py-1.5 px-5 flex justify-center flex-row border border-theme-color text-theme-color bg-light-grey rounded cursor-pointer hover:border-white duration-200 w-26 h-9"
+                  className="py-[7px] px-5 flex justify-center flex-row border border-theme-color text-theme-color text-xs uppercase font-extrabold whitespace-nowrap rounded hover:border-dark-gray dark:hover:border-white duration-100 w-26 h-8"
                   onClick={toggleModal}
                 >
                   Close
