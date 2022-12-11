@@ -1,4 +1,4 @@
-name: Update Atomic Catalog Alternate
+name: Update Atomic Catalog
 on:
   schedule:
     - cron: 0 0 * * MON
