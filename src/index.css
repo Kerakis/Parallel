@@ -8,5 +8,6 @@
 @layer base {
   html {
     font-family: 'Montserrat', sans-serif;
+    height: 100%;
   }
 }

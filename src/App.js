@@ -359,6 +359,7 @@ function App() {
 
   useEffect(() => {
     if (state.time === 0) {
+      addToHistory();
       endGame();
     }
   }, [endGame, state.time]);
@@ -447,7 +448,7 @@ function App() {
   const year = new Date().getFullYear();
 
   const buttonStyle =
-    'border border-solid border-light-purple hover:border-white rounded h-8 mt-4 uppercase font-extrabold whitespace-nowrap';
+    'border border-solid border-light-purple rounded h-8 mt-4 uppercase font-extrabold whitespace-nowrap';
 
   return (
     <div className="flex flex-col place-items-center text-light-purple m-4">
@@ -613,9 +614,9 @@ function App() {
           </div>
         )}
       </div>
-      <footer className="mx-auto md:fixed md:right-1 md:bottom-0 m-1 mt-4 text-sm bottom-0 text-white sticky top-[100vh] md:top-auto">
+      <footer className="mx-auto relative bottom-0 mt-12 text-sm text-white md:fixed md:m-1 md:right-1">
         <p>
-          Made with <span className="font-sans">&#128556;</span> by
+          Made with <span className="font-sans">&#9749;</span> by
           <a
             href="https://github.com/Kerakis"
             target="_blank"
