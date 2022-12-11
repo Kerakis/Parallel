@@ -19,11 +19,11 @@ function HistoryModal({ modalOpen, closeModal, history }) {
     <div className="bg-black bg-opacity-70 fixed top-0 left-0 overflow-x-hidden overflow-y-auto block w-full h-full">
       <div className="flex items-center relative transform-none w-screen max-w-none h-full min-h-[calc(100%-1rem)] m-0 sm:mt-7 sm:max-w-lg sm:w-auto sm:m-auto sm:min-h-[calc(100%-3.5rem)] sm:h-[calc(100%-3.5rem)] lg:max-w-3xl">
         <div className="flex flex-col relative bg-clip-padding bg-light-grey rounded xs:rounded-none w-full xs:h-full md:w-[50rem] max-h-full overflow-hidden">
-          <div className="flex flex-shrink-0 border-b border-b-white w-full p-4 justify-between items-center text-xl font-bold text-light-purple">
+          <div className="flex flex-shrink-0 border-b border-b-white w-full p-4 justify-between items-center text-xl font-bold text-theme-color">
             <h3>History</h3>
             <button
               type="button"
-              className="flex justify-center flex-row text-light-grey bg-light-purple bg-opacity-60 rounded cursor-pointer hover:bg-opacity-80 duration-200 w-7 h-7"
+              className="flex justify-center flex-row text-light-grey bg-theme-color bg-opacity-60 rounded cursor-pointer hover:bg-opacity-80 duration-200 w-7 h-7"
               onClick={closeModal}
             >
               X
@@ -34,7 +34,7 @@ function HistoryModal({ modalOpen, closeModal, history }) {
               {[...history].reverse().map((history) => (
                 <div key={history.id} className="history w-full">
                   <div>
-                    <div className="text-light-purple w-full mb-5">
+                    <div className="text-theme-color w-full mb-5">
                       Level: <span className="text-white">{count--}</span>
                     </div>
                     <div className="flex flex-col items-center">
@@ -56,14 +56,14 @@ function HistoryModal({ modalOpen, closeModal, history }) {
                       </a>
                     </div>
                   </div>
-                  <hr className="test bg-light-purple border-0 h-[1px] m-7" />
+                  <hr className="bg-theme-color border-0 h-[1px] m-7" />
                 </div>
               ))}
             </>
           </div>
           <div className="flex flex-wrap flex-shrink-0 justify-end items-center p-3 border-t border-t-white">
             <button
-              className="py-1.5 px-5 flex justify-center flex-row border border-light-purple text-light-purple bg-light-grey rounded cursor-pointer hover:border-white duration-200 w-26 h-9"
+              className="py-1.5 px-5 flex justify-center flex-row border border-theme-color text-theme-color bg-light-grey rounded cursor-pointer hover:border-white duration-200 w-26 h-9"
               onClick={closeModal}
             >
               Close
