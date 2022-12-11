@@ -54,7 +54,7 @@ function HistoryModal({
                 <h3>History</h3>
                 <button
                   type="button"
-                  className="flex justify-center flex-row text-light-gray dark:text-dark-gray bg-theme-color bg-opacity-60 rounded cursor-pointer hover:bg-opacity-80 duration-200 w-7 h-7"
+                  className="flex justify-center flex-row text-light-gray dark:text-dark-gray bg-theme-color bg-opacity-60 rounded cursor-pointer hover:bg-opacity-80 duration-100 w-7 h-7"
                   onClick={toggleModal}
                 >
                   X
@@ -62,8 +62,8 @@ function HistoryModal({
               </div>
               <div className="flex flex-col flex-auto items-center relative p-4 w-auto xs:overflow-y-auto overflow-y-auto">
                 <>
-                  {[...history].reverse().map((history) => (
-                    <div key={history.id} className="history w-full">
+                  {[...history].reverse().map((history, index) => (
+                    <div key={index} className="history w-full">
                       <div>
                         <div className="text-theme-color w-full mb-5">
                           Level:{' '}

@@ -36,6 +36,7 @@ function Content() {
   };
   const [state, dispatch] = useReducer(reducer, initialState);
   const timerRef = useRef(0);
+  const focusRef = useRef(null);
 
   const toggleModal = useCallback(() => {
     setHistoryModalOpen((prevState) => !prevState);
@@ -321,7 +322,7 @@ function Content() {
       setIncorrectAnswerThree(cardPool[randomCardArray[2]]);
       setCorrectAnswer(cardPool[randomCardArray[3]]);
     }
-  }, [format, cardPool, randomCardArray]);
+  }, [cardPool, randomCardArray]);
 
   useEffect(() => {
     let initialAnswers = [
@@ -339,6 +340,10 @@ function Content() {
     const shuffledAnswers = shuffle(initialAnswers);
 
     setAnswers(shuffledAnswers);
+
+    return () => {
+      setAnswers();
+    };
   }, [
     correctAnswer,
     incorrectAnswerOne,
@@ -369,6 +374,8 @@ function Content() {
   }, [endGame, state.time]);
 
   const handleClick = (e) => {
+    // This prevents the correct answer from being auto-focused
+    focusRef.current.blur();
     addToHistory();
     if (e === correctAnswer) {
       nextLevel();
@@ -569,6 +576,7 @@ function Content() {
                         onClick={(e) => handleClick(e.target.value)}
                         disabled={disable}
                         value={answer.label}
+                        ref={focusRef}
                       >
                         {answer.label}
                       </button>
@@ -581,7 +589,7 @@ function Content() {
                   <button
                     className={`${buttonStyle} ${
                       !playing &&
-                      'hover:border-dark-gray dark:hover:border-white duration-200'
+                      'hover:border-dark-gray dark:hover:border-white duration-100'
                     } xs:text-xxs text-xs md:text-sm overflow-hidden w-3/4 justify-self-start`}
                     disabled={!disable}
                     onClick={() => setHistoryModalOpen(true)}
@@ -591,7 +599,7 @@ function Content() {
                   <button
                     className={`${buttonStyle} ${
                       !playing &&
-                      'hover:border-dark-gray dark:hover:border-white duration-200'
+                      'hover:border-dark-gray dark:hover:border-white duration-100'
                     } xs:text-xxs text-xs md:text-sm overflow-hidden w-3/4 justify-self-end ${
                       state.time < 4 && 'text-red-500'
                     }`}
@@ -608,7 +616,7 @@ function Content() {
                   <button
                     className={`${buttonStyle} ${
                       !playing &&
-                      'hover:border-dark-gray dark:hover:border-white duration-200'
+                      'hover:border-dark-gray dark:hover:border-white duration-100'
                     } xs:text-xxs text-xs md:text-sm overflow-hidden w-3/4 justify-self-start`}
                     onClick={restartGame}
                   >
@@ -617,7 +625,7 @@ function Content() {
                   <button
                     className={`${buttonStyle} ${
                       !playing &&
-                      'hover:border-dark-gray dark:hover:border-white duration-200'
+                      'hover:border-dark-gray dark:hover:border-white duration-100'
                     } xs:text-xxs text-xs md:text-sm overflow-hidden w-3/4  justify-self-end`}
                     onClick={changeFormat}
                   >
