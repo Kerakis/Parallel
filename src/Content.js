@@ -34,17 +34,21 @@ function Content() {
     time: 10,
   };
   const [state, dispatch] = useReducer(reducer, initialState);
-  const idRef = useRef(0);
+  const timerRef = useRef(0);
+
+  const toggleModal = React.useCallback(() => {
+    setHistoryModalOpen((prevState) => !prevState);
+  }, []);
 
   useEffect(() => {
     if (!state.isRunning) {
       return;
     }
-    idRef.current = setInterval(() => dispatch({ type: 'tick' }), 1000);
+    timerRef.current = setInterval(() => dispatch({ type: 'tick' }), 1000);
 
     return () => {
-      clearInterval(idRef.current);
-      idRef.current = 0;
+      clearInterval(timerRef.current);
+      timerRef.current = 0;
     };
   }, [state.isRunning]);
 
@@ -606,6 +610,7 @@ function Content() {
         )}
       </div>
       <HistoryModal
+        toggleModal={toggleModal}
         modalOpen={historyModalOpen}
         closeModal={() => setHistoryModalOpen(false)}
         history={history}
