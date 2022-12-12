@@ -30,7 +30,7 @@ function HistoryModal({
         capture: true,
       });
     };
-  }, [historyModalOpen]);
+  }, [historyModalOpen, outsideClickCloseModal]);
 
   useEffect(() => {
     const closeOnEscapeKey = (e) => (e.key === 'Escape' ? closeModal() : null);

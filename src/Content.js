@@ -372,10 +372,6 @@ function Content() {
     setHistory(tempArr);
   }, [history, historyValue]);
 
-  React.useEffect(() => {
-    addToHistory();
-  }, [addToHistory]);
-
   useEffect(() => {
     if (state.time === 0) {
       addToHistory();
