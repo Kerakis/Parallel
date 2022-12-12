@@ -366,15 +366,32 @@ function Content() {
     }
   }, [level]);
 
+  const addToHistory = useCallback(() => {
+    let tempArr = history;
+    tempArr.push(historyValue);
+    setHistory(tempArr);
+  }, [history, historyValue]);
+
+  React.useEffect(() => {
+    addToHistory();
+  }, [addToHistory]);
+
   useEffect(() => {
     if (state.time === 0) {
       addToHistory();
       endGame();
     }
-  }, [endGame, state.time]);
+  }, [addToHistory, endGame, state.time]);
+
+  // Prevents pressing enter or space to avoid abuse. Shitty workaround.
+  const handleKeyDown = (e) => {
+    if (e.keyCode === 13 || e.keyCode === 32) {
+      e.preventDefault();
+    }
+  };
 
   const handleClick = (e) => {
-    // This prevents the correct answer from being auto-focused
+    // This *attempts* to prevent the correct answer from being auto-focused
     focusRef.current.blur();
     addToHistory();
     if (e === correctAnswer) {
@@ -383,12 +400,6 @@ function Content() {
       setSelectedAnswer(e);
       endGame();
     }
-  };
-
-  const addToHistory = () => {
-    let tempArr = history;
-    tempArr.push(historyValue);
-    setHistory(tempArr);
   };
 
   const restartGame = () => {
@@ -573,6 +584,7 @@ function Content() {
                           'border-dark-gray dark:border-white'
                         }`}
                         key={answer.index}
+                        onKeyDown={(e) => handleKeyDown(e)}
                         onClick={(e) => handleClick(e.target.value)}
                         disabled={disable}
                         value={answer.label}
