@@ -1,6 +1,6 @@
-/* eslint-disable react/prop-types */
 import React, { useCallback, useEffect, useRef } from 'react';
 import ReactDom from 'react-dom';
+import PropTypes from 'prop-types';
 
 function HistoryModal({
   modalOpen,
@@ -9,6 +9,14 @@ function HistoryModal({
   toggleModal,
   closeModal,
 }) {
+  HistoryModal.propTypes = {
+    modalOpen: PropTypes.bool,
+    history: PropTypes.array,
+    historyModalOpen: PropTypes.func,
+    toggleModal: PropTypes.func,
+    closeModal: PropTypes.func,
+  };
+
   const modalRef = useRef(null);
 
   const outsideClickCloseModal = useCallback(
