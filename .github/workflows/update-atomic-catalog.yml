@@ -1,4 +1,4 @@
-name: Update Atomic Catalog
+name: Update Card Catalog
 on:
   schedule:
     - cron: 0 0 * * MON
