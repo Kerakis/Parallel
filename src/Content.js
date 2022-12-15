@@ -75,7 +75,7 @@ function Content() {
   const fetchStandard = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch(`./assets/StandardAtomic.json`, {
+      const response = await fetch(`./assets/standard.json`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -90,12 +90,10 @@ function Content() {
       }
 
       const result = await response.json();
-      setCardPool(Object.keys(result.data));
-
-      let randomCardArray = Object.keys(result.data);
+      setCardPool(result);
       setRandomCardArray(
         Array.from({ length: 4 }, () =>
-          Math.floor(Math.random() * randomCardArray.length)
+          Math.floor(Math.random() * result.length)
         )
       );
     } catch (err) {
@@ -114,7 +112,7 @@ function Content() {
   const fetchPauper = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch(`./assets/PauperAtomic.json`, {
+      const response = await fetch(`./assets/pauper.json`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -129,12 +127,10 @@ function Content() {
       }
 
       const result = await response.json();
-      setCardPool(Object.keys(result.data));
-
-      let randomCardArray = Object.keys(result.data);
+      setCardPool(result);
       setRandomCardArray(
         Array.from({ length: 4 }, () =>
-          Math.floor(Math.random() * randomCardArray.length)
+          Math.floor(Math.random() * result.length)
         )
       );
     } catch (err) {
@@ -153,7 +149,7 @@ function Content() {
   const fetchPioneer = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch(`./assets/PioneerAtomic.json`, {
+      const response = await fetch(`./assets/pioneer.json`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -168,12 +164,10 @@ function Content() {
       }
 
       const result = await response.json();
-      setCardPool(Object.keys(result.data));
-
-      let randomCardArray = Object.keys(result.data);
+      setCardPool(result);
       setRandomCardArray(
         Array.from({ length: 4 }, () =>
-          Math.floor(Math.random() * randomCardArray.length)
+          Math.floor(Math.random() * result.length)
         )
       );
     } catch (err) {
@@ -192,7 +186,7 @@ function Content() {
   const fetchModern = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch(`./assets/ModernAtomic.json`, {
+      const response = await fetch(`./assets/modern.json`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -207,12 +201,10 @@ function Content() {
       }
 
       const result = await response.json();
-      setCardPool(Object.keys(result.data));
-
-      let randomCardArray = Object.keys(result.data);
+      setCardPool(result);
       setRandomCardArray(
         Array.from({ length: 4 }, () =>
-          Math.floor(Math.random() * randomCardArray.length)
+          Math.floor(Math.random() * result.length)
         )
       );
     } catch (err) {
@@ -231,7 +223,7 @@ function Content() {
   const fetchLegacy = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch(`./assets/LegacyAtomic.json`, {
+      const response = await fetch(`./assets/legacy.json`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -246,12 +238,10 @@ function Content() {
       }
 
       const result = await response.json();
-      setCardPool(Object.keys(result.data));
-
-      let randomCardArray = Object.keys(result.data);
+      setCardPool(result);
       setRandomCardArray(
         Array.from({ length: 4 }, () =>
-          Math.floor(Math.random() * randomCardArray.length)
+          Math.floor(Math.random() * result.length)
         )
       );
     } catch (err) {
@@ -270,7 +260,7 @@ function Content() {
   const fetchVintage = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch(`./assets/VintageAtomic.json`, {
+      const response = await fetch(`./assets/vintage.json`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -285,12 +275,10 @@ function Content() {
       }
 
       const result = await response.json();
-      setCardPool(Object.keys(result.data));
-
-      let randomCardArray = Object.keys(result.data);
+      setCardPool(result);
       setRandomCardArray(
         Array.from({ length: 4 }, () =>
-          Math.floor(Math.random() * randomCardArray.length)
+          Math.floor(Math.random() * result.length)
         )
       );
     } catch (err) {
