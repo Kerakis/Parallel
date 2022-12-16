@@ -18,6 +18,6 @@ jobs:
       - name: Build and Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.4.1
         with:
-          branch: main # Pushes the updates to the gh-pages branch.
+          branch: gh-pages # Pushes the updates to the gh-pages branch.
           folder: scripts # The location of the json files saved by the Fetch API Data action.
-          target-folder: test # Saves the data into the 'assets' directory on the gh-pages branch.
+          target-folder: assets # Saves the data into the 'assets' directory on the gh-pages branch.
