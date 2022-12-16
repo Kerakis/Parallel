@@ -12,9 +12,6 @@ jobs:
         with:
           persist-credentials: false
 
-      - uses: actions/setup-bash@v2
-        with:
-          run: apt-get install -y jq
       - name: Run Card Catalog Update
         run: bash ./scripts/update-card-catalog.sh
 
