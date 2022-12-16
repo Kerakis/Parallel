@@ -5,25 +5,22 @@ import React, {
   useRef,
   useState,
 } from 'react';
+import { useFetch } from './useFetch';
 import HistoryModal from './HistoryModal';
 
 function Content() {
-  const [format, setFormat] = useState(null);
-  const [cardPool, setCardPool] = useState(null);
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [query, setQuery] = useState('');
+  const [startScreen, setStartScreen] = useState(true);
+  const [artError, setArtError] = useState(null);
   const [cardIsLoading, setCardIsLoading] = useState(false);
   const [disable, setDisable] = useState(false);
   const [level, setLevel] = useState(0);
+  const [hiddenCount, setHiddenCount] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [cardArt, setCardArt] = useState(null);
   const [cardFlavor, setCardFlavor] = useState(null);
   const [showGame, setShowGame] = useState(false);
-  const [randomCardArray, setRandomCardArray] = useState([]);
-  const [incorrectAnswerOne, setIncorrectAnswerOne] = useState('');
-  const [incorrectAnswerTwo, setIncorrectAnswerTwo] = useState('');
-  const [incorrectAnswerThree, setIncorrectAnswerThree] = useState('');
-  const [correctAnswer, setCorrectAnswer] = useState(null);
+  const [correctAnswer, setCorrectAnswer] = useState(undefined);
   const [selectedAnswer, setSelectedAnswer] = useState('');
   const [answers, setAnswers] = useState([]);
   const [endMessage, setEndMessage] = useState('');
@@ -37,6 +34,8 @@ function Content() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const timerRef = useRef(0);
   const focusRef = useRef(null);
+  const url = query && `./assets/${query}.json`;
+  const { status, data, error } = useFetch(url);
 
   const toggleModal = useCallback(() => {
     setHistoryModalOpen((prevState) => !prevState);
@@ -72,272 +71,34 @@ function Content() {
     }
   }
 
-  const fetchStandard = async () => {
-    try {
-      setIsLoading(true);
-      const response = await fetch(`./assets/standard.json`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`${response.status}`);
-      } else if (response.ok) {
-        setError(null);
-      }
-
-      const result = await response.json();
-      setCardPool(result);
-      setRandomCardArray(
-        Array.from({ length: 4 }, () =>
-          Math.floor(Math.random() * result.length)
-        )
-      );
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setIsLoading(false);
-      setFormat('Standard');
-      setLevel(1);
-      setPlaying(true);
-      setShowGame(true);
-      setDisable(false);
-      dispatch({ type: 'start' });
-    }
-  };
-
-  const fetchPauper = async () => {
-    try {
-      setIsLoading(true);
-      const response = await fetch(`./assets/pauper.json`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`${response.status}`);
-      } else if (response.ok) {
-        setError(null);
-      }
-
-      const result = await response.json();
-      setCardPool(result);
-      setRandomCardArray(
-        Array.from({ length: 4 }, () =>
-          Math.floor(Math.random() * result.length)
-        )
-      );
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setIsLoading(false);
-      setFormat('Pauper');
-      setLevel(1);
-      setPlaying(true);
-      setShowGame(true);
-      setDisable(false);
-      dispatch({ type: 'start' });
-    }
-  };
-
-  const fetchPioneer = async () => {
-    try {
-      setIsLoading(true);
-      const response = await fetch(`./assets/pioneer.json`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`${response.status}`);
-      } else if (response.ok) {
-        setError(null);
-      }
-
-      const result = await response.json();
-      setCardPool(result);
-      setRandomCardArray(
-        Array.from({ length: 4 }, () =>
-          Math.floor(Math.random() * result.length)
-        )
-      );
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setIsLoading(false);
-      setFormat('Pioneer');
-      setLevel(1);
-      setPlaying(true);
-      setShowGame(true);
-      setDisable(false);
-      dispatch({ type: 'start' });
-    }
-  };
-
-  const fetchModern = async () => {
-    try {
-      setIsLoading(true);
-      const response = await fetch(`./assets/modern.json`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`${response.status}`);
-      } else if (response.ok) {
-        setError(null);
-      }
-
-      const result = await response.json();
-      setCardPool(result);
-      setRandomCardArray(
-        Array.from({ length: 4 }, () =>
-          Math.floor(Math.random() * result.length)
-        )
-      );
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setIsLoading(false);
-      setFormat('Modern');
-      setLevel(1);
-      setPlaying(true);
-      setShowGame(true);
-      setDisable(false);
-      dispatch({ type: 'start' });
-    }
-  };
-
-  const fetchLegacy = async () => {
-    try {
-      setIsLoading(true);
-      const response = await fetch(`./assets/legacy.json`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`${response.status}`);
-      } else if (response.ok) {
-        setError(null);
-      }
-
-      const result = await response.json();
-      setCardPool(result);
-      setRandomCardArray(
-        Array.from({ length: 4 }, () =>
-          Math.floor(Math.random() * result.length)
-        )
-      );
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setIsLoading(false);
-      setFormat('Legacy');
-      setLevel(1);
-      setPlaying(true);
-      setShowGame(true);
-      setDisable(false);
-      dispatch({ type: 'start' });
-    }
-  };
-
-  const fetchVintage = async () => {
-    try {
-      setIsLoading(true);
-      const response = await fetch(`./assets/vintage.json`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`${response.status}`);
-      } else if (response.ok) {
-        setError(null);
-      }
-
-      const result = await response.json();
-      setCardPool(result);
-      setRandomCardArray(
-        Array.from({ length: 4 }, () =>
-          Math.floor(Math.random() * result.length)
-        )
-      );
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setIsLoading(false);
-      setFormat('Vintage');
-      setLevel(1);
-      setPlaying(true);
-      setShowGame(true);
-      setDisable(false);
-      dispatch({ type: 'start' });
-    }
-  };
-
-  const newCards = () => {
-    setRandomCardArray(
-      Array.from({ length: 4 }, () =>
-        Math.floor(Math.random() * cardPool.length)
-      )
-    );
-    dispatch({ type: 'start' });
-  };
-
   useEffect(() => {
-    if (cardPool !== null) {
-      setIncorrectAnswerOne(cardPool[randomCardArray[0]]);
-      setIncorrectAnswerTwo(cardPool[randomCardArray[1]]);
-      setIncorrectAnswerThree(cardPool[randomCardArray[2]]);
-      setCorrectAnswer(cardPool[randomCardArray[3]]);
+    if (data !== null) {
+      const cardArray = Array.from({ length: 4 }, () =>
+        Math.floor(Math.random() * data.length)
+      );
+
+      const incorrectAnswerOne = data[cardArray[0]];
+      const incorrectAnswerTwo = data[cardArray[1]];
+      const incorrectAnswerThree = data[cardArray[2]];
+      const correctAnswer = data[cardArray[3]];
+      setCorrectAnswer(correctAnswer);
+
+      const initialAnswers = [
+        { label: `${incorrectAnswerOne}`, index: 0 },
+        { label: `${incorrectAnswerTwo}`, index: 1 },
+        {
+          label: `${incorrectAnswerThree}`,
+          index: 2,
+        },
+        { label: `${correctAnswer}`, index: 3 },
+      ];
+
+      const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
+      const shuffledAnswers = shuffle(initialAnswers);
+      setAnswers(shuffledAnswers);
+      dispatch({ type: 'start' });
     }
-  }, [cardPool, randomCardArray]);
-
-  useEffect(() => {
-    let initialAnswers = [
-      { label: `${incorrectAnswerOne}`, index: 0 },
-      { label: `${incorrectAnswerTwo}`, index: 1 },
-      {
-        label: `${incorrectAnswerThree}`,
-        index: 2,
-      },
-      { label: `${correctAnswer}`, index: 3 },
-    ];
-
-    const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
-
-    const shuffledAnswers = shuffle(initialAnswers);
-
-    setAnswers(shuffledAnswers);
-
-    return () => {
-      setAnswers();
-    };
-  }, [
-    correctAnswer,
-    incorrectAnswerOne,
-    incorrectAnswerThree,
-    incorrectAnswerTwo,
-  ]);
+  }, [data, hiddenCount]);
 
   const endGame = useCallback(() => {
     setDisable(true);
@@ -386,19 +147,43 @@ function Content() {
     }
   };
 
-  const restartGame = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setStartScreen(false);
     setLevel(1);
+    setHiddenCount(1);
+    setPlaying(true);
+    setShowGame(true);
+    setDisable(false);
+    dispatch({ type: 'start' });
+
+    const query = e.target.value;
+    if (query) {
+      setQuery(query);
+    }
+  };
+
+  const restartGame = () => {
+    // Wonky workaround to force a re-render for level 1
+    if (level === 1) {
+      setLevel(1);
+      setHiddenCount(hiddenCount - 1);
+      setQuery(query);
+    } else {
+      setLevel(1);
+      setHiddenCount(1);
+    }
     setPlaying(true);
     setShowGame(true);
     setDisable(false);
     setHistory([]);
     dispatch({ type: 'reset' });
-    newCards();
   };
 
   const changeFormat = () => {
-    setFormat(null);
+    setStartScreen(true);
     setLevel(0);
+    setHiddenCount(0);
     setShowGame(false);
     setEndMessage(false);
     setHistory([]);
@@ -407,7 +192,8 @@ function Content() {
 
   useEffect(() => {
     const fetchArt = async () => {
-      if (correctAnswer !== null) {
+      // Fix this. It shouldn't need to be undefined.
+      if (correctAnswer !== undefined) {
         try {
           setCardIsLoading(true);
           const response = await fetch(
@@ -435,10 +221,10 @@ function Content() {
           if (!response.ok) {
             throw new Error(`${response.status}`);
           } else if (response.ok) {
-            setError(null);
+            setArtError(null);
           }
         } catch (err) {
-          setError(err.message);
+          setArtError(err.message);
         } finally {
           setCardIsLoading(false);
         }
@@ -450,8 +236,8 @@ function Content() {
 
   const nextLevel = () => {
     setLevel(level + 1);
+    setHiddenCount(hiddenCount + 1);
     dispatch({ type: 'reset' });
-    newCards();
   };
 
   const buttonStyle =
@@ -460,18 +246,18 @@ function Content() {
   return (
     <div className="flex flex-col flex-1">
       <div>
-        {isLoading && (
+        {status === 'fetching' && (
           <h1 className="text-center mt-4">
             Loading cards. This may take a moment.
           </h1>
         )}
-        {error && (
+        {status === error && (
           <h1 className="text-center mt-4">
-            Hmm. Something went wrong. Status: {error}
+            Hmm. Something went wrong. {error}
           </h1>
         )}
       </div>
-      {format === null && (
+      {startScreen && (
         <div className="mt-20">
           <div className="text-center font-bold mb-4">
             What format would you like cards from?
@@ -481,42 +267,48 @@ function Content() {
               <button
                 type="submit"
                 className={`${buttonStyle} text-sm min-w-full`}
-                onClick={fetchStandard}
+                onClick={handleSubmit}
+                value="standard"
               >
                 Standard
               </button>
               <button
                 type="submit"
                 className={`${buttonStyle} text-sm min-w-full`}
-                onClick={fetchPauper}
+                onClick={handleSubmit}
+                value="pauper"
               >
                 Pauper
               </button>
               <button
                 type="submit"
                 className={`${buttonStyle} text-sm min-w-full`}
-                onClick={fetchPioneer}
+                onClick={handleSubmit}
+                value="pioneer"
               >
                 Pioneer
               </button>
               <button
                 type="submit"
                 className={`${buttonStyle} text-sm min-w-full`}
-                onClick={fetchModern}
+                onClick={handleSubmit}
+                value="modern"
               >
                 Modern
               </button>
               <button
                 type="submit"
                 className={`${buttonStyle} text-sm min-w-full`}
-                onClick={fetchLegacy}
+                onClick={handleSubmit}
+                value="legacy"
               >
                 Legacy
               </button>
               <button
                 type="submit"
                 className={`${buttonStyle} text-sm min-w-full`}
-                onClick={fetchVintage}
+                onClick={handleSubmit}
+                value="vintage"
               >
                 Vintage
               </button>
@@ -529,6 +321,7 @@ function Content() {
         {showGame && (
           <div className="w-full">
             <div className="flex mx-auto justify-center xs:max-h-96">
+              {artError && <div>Card error {artError}</div>}
               <img
                 src={cardArt}
                 alt="Guess the card based on the artwork!"
@@ -580,7 +373,7 @@ function Content() {
                   })}
                 </div>
               )}
-              {format !== null && (
+              {!startScreen && (
                 <div className="grid grid-cols-2 content-between mt-4 md:mt-8">
                   <button
                     className={`${buttonStyle} ${
@@ -607,7 +400,7 @@ function Content() {
                   </button>
                 </div>
               )}
-              {!playing && format !== null && (
+              {!playing && (
                 <div className="grid grid-cols-2 content-between">
                   <button
                     className={`${buttonStyle} ${

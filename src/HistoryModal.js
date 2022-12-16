@@ -53,11 +53,11 @@ function HistoryModal({
   return modalOpen
     ? ReactDom.createPortal(
         <div className="bg-black bg-opacity-70 fixed top-0 left-0 overflow-x-hidden overflow-y-auto block w-full h-full">
-          <div
-            ref={modalRef}
-            className="flex items-center relative transform-none w-screen max-w-none h-full min-h-[calc(100%-1rem)] m-0 sm:mt-7 sm:max-w-lg sm:w-auto sm:m-auto sm:min-h-[calc(100%-3.5rem)] sm:h-[calc(100%-3.5rem)] lg:max-w-3xl"
-          >
-            <div className="flex flex-col relative bg-clip-padding bg-light-gray dark:bg-dark-gray rounded xs:rounded-none w-full xs:h-full md:w-[50rem] max-h-full overflow-hidden">
+          <div className="flex items-center relative transform-none w-screen max-w-none h-full min-h-[calc(100%-1rem)] m-0 sm:mt-7 sm:max-w-lg sm:w-auto sm:m-auto sm:min-h-[calc(100%-3.5rem)] sm:h-[calc(100%-3.5rem)] lg:max-w-3xl">
+            <div
+              ref={modalRef}
+              className="flex flex-col relative bg-clip-padding bg-light-gray dark:bg-dark-gray rounded xs:rounded-none w-full xs:h-full md:w-[50rem] max-h-full overflow-hidden"
+            >
               <div className="flex flex-shrink-0 border-b border-b-dark-gray dark:border-b-white w-full p-4 justify-between items-center text-xl font-bold text-theme-color">
                 <h3>History</h3>
                 <button
