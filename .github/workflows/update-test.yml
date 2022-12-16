@@ -1,0 +1,26 @@
+name: Test
+on:
+  schedule:
+    - cron: 0 0 * * MON
+  workflow_dispatch:
+jobs:
+  update-card-catalog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+          uses: actions/checkout@v3
+          with:
+            persist-credentials: false
+
+      - uses: actions/setup-bash@v2
+        with:
+          run: apt-get install -y jq
+      - name: Run Card Catalog Update
+        run: bash ./scripts/update-card-catalog.sh
+        
+      - name: Build and Deploy 🚀
+          uses: JamesIves/github-pages-deploy-action@v4.4.1
+          with:
+            branch: main # Pushes the updates to the gh-pages branch.
+            folder: scripts # The location of the json files saved by the Fetch API Data action.
+            target-folder: test # Saves the data into the 'assets' directory on the gh-pages branch.
