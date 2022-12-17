@@ -142,7 +142,7 @@ function Content() {
 
   const handleFormatClick = (e) => {
     if (e === format) {
-      setHiddenCount(Math.floor(Math.random() * data.length));
+      setHiddenCount(hiddenCount + 1);
       setFormat(e);
     } else {
       setHiddenCount(1);
@@ -166,7 +166,7 @@ function Content() {
     // Wonky workaround to force a re-render for level 1
     if (level === 1) {
       setLevel(1);
-      setHiddenCount(hiddenCount - 1);
+      setHiddenCount(hiddenCount + 1);
       setQuery(query);
     } else {
       setLevel(1);
@@ -233,7 +233,7 @@ function Content() {
 
   const nextLevel = () => {
     setLevel(level + 1);
-    setHiddenCount(Math.floor(Math.random() * data.length));
+    setHiddenCount(hiddenCount + 1);
     dispatch({ type: 'reset' });
   };
 
