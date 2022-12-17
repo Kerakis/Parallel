@@ -128,7 +128,7 @@ function Content() {
   }, [addToHistory, endGame, state.time]);
 
   const handleClick = (e) => {
-    // This *attempts* to prevent the correct answer from being auto-focused
+    // This prevents the correct answer from being auto-focused
     document.activeElement.blur();
     addToHistory();
     if (e === correctAnswer) {
@@ -147,6 +147,7 @@ function Content() {
     setPlaying(true);
     setShowGame(true);
     setDisable(false);
+    dispatch({ type: 'reset' });
     dispatch({ type: 'start' });
 
     const query = e.target.value;
