@@ -10,7 +10,8 @@
 
 # production
 /build
-.npmignore
+/public/assets/data.json
+
 
 # misc
 .DS_Store

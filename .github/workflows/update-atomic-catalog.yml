@@ -13,7 +13,7 @@ jobs:
           persist-credentials: false
 
       - name: Run Card Catalog Update
-        run: bash ./update-card-catalog.sh
+        run: bash ./public/update-card-catalog.sh
 
       - name: Build and Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.4.1
