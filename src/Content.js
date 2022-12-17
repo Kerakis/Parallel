@@ -33,7 +33,6 @@ function Content() {
   };
   const [state, dispatch] = useReducer(reducer, initialState);
   const timerRef = useRef(0);
-  const focusRef = useRef(null);
   const url = query && `./assets/${query}.json`;
   const { status, data, error } = useFetch(url);
 
@@ -128,16 +127,9 @@ function Content() {
     }
   }, [addToHistory, endGame, state.time]);
 
-  // Prevents pressing enter or space to avoid abuse. Shitty workaround.
-  const handleKeyDown = (e) => {
-    if (e.keyCode === 13 || e.keyCode === 32) {
-      e.preventDefault();
-    }
-  };
-
   const handleClick = (e) => {
     // This *attempts* to prevent the correct answer from being auto-focused
-    focusRef.current.blur();
+    document.activeElement.blur();
     addToHistory();
     if (e === correctAnswer) {
       nextLevel();
@@ -359,11 +351,9 @@ function Content() {
                           'border-dark-gray dark:border-white'
                         }`}
                         key={answer.index}
-                        onKeyDown={(e) => handleKeyDown(e)}
                         onClick={(e) => handleClick(e.target.value)}
                         disabled={disable}
                         value={answer.label}
-                        ref={focusRef}
                       >
                         {answer.label}
                       </button>
