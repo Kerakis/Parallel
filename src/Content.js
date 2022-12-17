@@ -11,6 +11,7 @@ import HistoryModal from './HistoryModal';
 function Content() {
   const [query, setQuery] = useState('');
   const [startScreen, setStartScreen] = useState(true);
+  const [format, setFormat] = useState(null);
   const [artError, setArtError] = useState(null);
   const [cardIsLoading, setCardIsLoading] = useState(false);
   const [disable, setDisable] = useState(false);
@@ -139,18 +140,23 @@ function Content() {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleFormatClick = (e) => {
+    if (e === format) {
+      setHiddenCount(Math.floor(Math.random() * data.length));
+      setFormat(e);
+    } else {
+      setHiddenCount(1);
+      setFormat(e);
+    }
     setStartScreen(false);
     setLevel(1);
-    setHiddenCount(1);
     setPlaying(true);
     setShowGame(true);
     setDisable(false);
     dispatch({ type: 'reset' });
     dispatch({ type: 'start' });
 
-    const query = e.target.value;
+    const query = e;
     if (query) {
       setQuery(query);
     }
@@ -258,7 +264,7 @@ function Content() {
               <button
                 type="submit"
                 className={`${buttonStyle} text-sm min-w-full`}
-                onClick={handleSubmit}
+                onClick={(e) => handleFormatClick(e.target.value)}
                 value="standard"
               >
                 Standard
@@ -266,7 +272,7 @@ function Content() {
               <button
                 type="submit"
                 className={`${buttonStyle} text-sm min-w-full`}
-                onClick={handleSubmit}
+                onClick={(e) => handleFormatClick(e.target.value)}
                 value="pauper"
               >
                 Pauper
@@ -274,7 +280,7 @@ function Content() {
               <button
                 type="submit"
                 className={`${buttonStyle} text-sm min-w-full`}
-                onClick={handleSubmit}
+                onClick={(e) => handleFormatClick(e.target.value)}
                 value="pioneer"
               >
                 Pioneer
@@ -282,7 +288,7 @@ function Content() {
               <button
                 type="submit"
                 className={`${buttonStyle} text-sm min-w-full`}
-                onClick={handleSubmit}
+                onClick={(e) => handleFormatClick(e.target.value)}
                 value="modern"
               >
                 Modern
@@ -290,7 +296,7 @@ function Content() {
               <button
                 type="submit"
                 className={`${buttonStyle} text-sm min-w-full`}
-                onClick={handleSubmit}
+                onClick={(e) => handleFormatClick(e.target.value)}
                 value="legacy"
               >
                 Legacy
@@ -298,7 +304,7 @@ function Content() {
               <button
                 type="submit"
                 className={`${buttonStyle} text-sm min-w-full`}
-                onClick={handleSubmit}
+                onClick={(e) => handleFormatClick(e.target.value)}
                 value="vintage"
               >
                 Vintage
@@ -341,10 +347,6 @@ function Content() {
                           playing &&
                           'hover:border-dark-gray dark:hover:border-white duration-100'
                         } ${
-                          answer.label.length >= 45
-                            ? 'xs:text-xxs'
-                            : 'text-xs md:text-sm'
-                        } ${
                           answer.index === 3 && !playing && 'border-red-500'
                         } ${
                           answer.label === selectedAnswer &&
@@ -356,7 +358,15 @@ function Content() {
                         disabled={disable}
                         value={answer.label}
                       >
-                        {answer.label}
+                        <span
+                          className={`pointer-events-none ${
+                            answer.label.length >= 45
+                              ? 'xs:text-xxs duration-0'
+                              : 'text-xs md:text-sm duration-0'
+                          }`}
+                        >
+                          {answer.label}
+                        </span>
                       </button>
                     );
                   })}
@@ -368,24 +378,28 @@ function Content() {
                     className={`${buttonStyle} ${
                       !playing &&
                       'hover:border-dark-gray dark:hover:border-white duration-100'
-                    } xs:text-xxs text-xs md:text-sm overflow-hidden w-3/4 justify-self-start`}
+                    } w-3/4 justify-self-start`}
                     disabled={!disable}
                     onClick={() => setHistoryModalOpen(true)}
                   >
-                    {playing ? `Level: ${level}` : `History`}
+                    <span className="xs:text-xxs text-xs md:text-sm overflow-hidden duration-0">
+                      {playing ? `Level: ${level}` : `History`}
+                    </span>
                   </button>
                   <button
                     className={`${buttonStyle} ${
                       !playing &&
                       'hover:border-dark-gray dark:hover:border-white duration-100'
-                    } xs:text-xxs text-xs md:text-sm overflow-hidden w-3/4 justify-self-end ${
+                    } w-3/4 justify-self-end ${
                       state.time < 4 && 'text-red-500'
                     }`}
                     disabled
                   >
-                    {state.time === 0
-                      ? `Time's Up!`
-                      : `00:${state.time.toString().padStart(2, '0')}`}
+                    <span className="xs:text-xxs text-xs md:text-sm overflow-hidden duration-0">
+                      {state.time === 0
+                        ? `Time's Up!`
+                        : `00:${state.time.toString().padStart(2, '0')}`}
+                    </span>
                   </button>
                 </div>
               )}
@@ -395,19 +409,23 @@ function Content() {
                     className={`${buttonStyle} ${
                       !playing &&
                       'hover:border-dark-gray dark:hover:border-white duration-100'
-                    } xs:text-xxs text-xs md:text-sm overflow-hidden w-3/4 justify-self-start`}
+                    } w-3/4 justify-self-start`}
                     onClick={restartGame}
                   >
-                    Restart Game
+                    <span className="xs:text-xxs text-xs md:text-sm overflow-hidden duration-0">
+                      Restart Game
+                    </span>
                   </button>
                   <button
                     className={`${buttonStyle} ${
                       !playing &&
                       'hover:border-dark-gray dark:hover:border-white duration-100'
-                    } xs:text-xxs text-xs md:text-sm overflow-hidden w-3/4  justify-self-end`}
+                    } w-3/4  justify-self-end`}
                     onClick={changeFormat}
                   >
-                    Change Format
+                    <span className="xs:text-xxs text-xs md:text-sm overflow-hidden duration-0">
+                      Change Format
+                    </span>
                   </button>
                 </div>
               )}
