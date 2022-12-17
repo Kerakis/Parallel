@@ -4,7 +4,7 @@ function Header(format) {
   return (
     <header>
       <h1 className="md:text-5xl text-3xl text-center font-extrabold md:mt-8">
-        Parallel
+        Parallels
       </h1>
       <h2 className="md:text-2xl text-xl text-dark-gray dark:text-white text-center md:mt-3 mt-2 mb-4">
         The Magic: The Gathering Art Matching Game
