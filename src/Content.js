@@ -183,7 +183,6 @@ function Content() {
   const changeFormat = () => {
     setStartScreen(true);
     setLevel(0);
-    setHiddenCount(0);
     setShowGame(false);
     setEndMessage(false);
     setHistory([]);
@@ -192,7 +191,6 @@ function Content() {
 
   useEffect(() => {
     const fetchArt = async () => {
-      // Fix this. It shouldn't need to be undefined.
       if (correctAnswer !== undefined) {
         try {
           setCardIsLoading(true);
@@ -236,7 +234,7 @@ function Content() {
 
   const nextLevel = () => {
     setLevel(level + 1);
-    setHiddenCount(hiddenCount + 1);
+    setHiddenCount(Math.floor(Math.random() * data.length));
     dispatch({ type: 'reset' });
   };
 
