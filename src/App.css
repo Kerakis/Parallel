@@ -1,15 +1,3 @@
-html {
-  --tw-bg-opacity: 1;
-  background-color: rgb(227 227 227 / var(--tw-bg-opacity));
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    --tw-bg-opacity: 1;
-    background-color: rgb(34 34 34 / var(--tw-bg-opacity));
-  }
-}
-
 .history:last-child hr {
   display: none;
 }

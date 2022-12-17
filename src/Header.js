@@ -14,6 +14,7 @@ function Header(format) {
           Guess the card based on the art!
         </h3>
       )}
+      <div></div>
     </header>
   );
 }
