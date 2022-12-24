@@ -38,9 +38,14 @@ function Content() {
   const { status, data, error } = useFetch(url);
   const scrollAnchor = useRef(null);
 
-  const scrollToAnchor = () => {
-    scrollAnchor.current?.scrollIntoView({ behavior: 'smooth' });
-  };
+  useEffect(() => {
+    // Scroll to the play area during gameplay
+    scrollAnchor.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+      inline: 'nearest',
+    });
+  }, [playing, hiddenCount]);
 
   const toggleModal = useCallback(() => {
     setHistoryModalOpen((prevState) => !prevState);
@@ -160,7 +165,6 @@ function Content() {
     setDisable(false);
     dispatch({ type: 'reset' });
     dispatch({ type: 'start' });
-    scrollToAnchor();
 
     const query = e;
     if (query) {
@@ -230,7 +234,6 @@ function Content() {
           setArtError(err.message);
         } finally {
           setCardIsLoading(false);
-          scrollToAnchor();
         }
       }
     };
@@ -455,13 +458,13 @@ function Content() {
           </div>
         )}
       </div>
-      <div ref={scrollAnchor} />
       <HistoryModal
         toggleModal={toggleModal}
         modalOpen={historyModalOpen}
         closeModal={() => setHistoryModalOpen(false)}
         history={history}
       />
+      <div ref={scrollAnchor} />
     </div>
   );
 }
