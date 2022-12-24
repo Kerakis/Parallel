@@ -36,6 +36,11 @@ function Content() {
   const timerRef = useRef(0);
   const url = query && `./assets/${query}.json`;
   const { status, data, error } = useFetch(url);
+  const scrollAnchor = useRef(null);
+
+  const scrollToAnchor = () => {
+    scrollAnchor.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   const toggleModal = useCallback(() => {
     setHistoryModalOpen((prevState) => !prevState);
@@ -155,6 +160,7 @@ function Content() {
     setDisable(false);
     dispatch({ type: 'reset' });
     dispatch({ type: 'start' });
+    scrollToAnchor();
 
     const query = e;
     if (query) {
@@ -224,6 +230,7 @@ function Content() {
           setArtError(err.message);
         } finally {
           setCardIsLoading(false);
+          scrollToAnchor();
         }
       }
     };
@@ -242,6 +249,21 @@ function Content() {
 
   return (
     <div className="flex flex-col flex-1">
+      <header>
+        <div className="2xl:m-8">
+          <h1 className="md:text-5xl text-3xl text-center font-extrabold">
+            Parallels
+          </h1>
+          <h2 className="md:text-2xl text-xl text-dark-gray dark:text-white text-center md:mt-3 mt-2 mb-4">
+            The Magic: The Gathering Art Matching Game
+          </h2>
+        </div>
+        {showGame && (
+          <h3 className="md:text-xl text-l text-dark-gray dark:text-white text-center md:mt-3 mt-2 mb-4">
+            Guess the card based on the art!
+          </h3>
+        )}
+      </header>
       <div>
         {status === 'fetching' && (
           <h1 className="text-center mt-4">
@@ -433,6 +455,7 @@ function Content() {
           </div>
         )}
       </div>
+      <div ref={scrollAnchor} />
       <HistoryModal
         toggleModal={toggleModal}
         modalOpen={historyModalOpen}
