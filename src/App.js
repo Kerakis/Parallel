@@ -6,7 +6,7 @@ import Footer from './Footer';
 
 function App() {
   return (
-    <div className="flex flex-col min-h-screen bg-light-gray dark:bg-dark-gray text-theme-color transition scrollbar-hide lg:scrollbar-default scroll-smooth">
+    <div className="flex flex-col min-h-screen bg-light-gray dark:bg-dark-gray text-theme-color transition scroll-smooth">
       <Switcher />
       <Content />
       <Footer />
