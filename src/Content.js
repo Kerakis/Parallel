@@ -251,7 +251,7 @@ function Content() {
     'border border-theme-color rounded h-8 mt-4 uppercase font-extrabold whitespace-nowrap';
 
   return (
-    <div className="flex flex-col flex-1">
+    <div className="flex flex-col flex-1 mx-2">
       <header>
         <div className="2xl:m-8">
           <h1 className="md:text-5xl text-3xl text-center font-extrabold">
